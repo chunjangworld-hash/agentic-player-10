@@ -1,0 +1,205 @@
+{
+  "_meta": {
+    "purpose": "효도비서 check_suspicious_message Tool의 사기 패턴 매칭 DB",
+    "source": "GPT 외주 결과 (2026-06-22). KISA/경찰청/금감원 2025-2026 최신 자료 기반.",
+    "total_patterns": 18,
+    "last_updated": "2026-06-22"
+  },
+  "patterns": [
+    {
+      "type_name": "정부·공공기관 사칭 행정처분 스미싱",
+      "description": "과태료, 범칙금, 벌점, 통보서 등 행정처분 확인을 빙자해 URL 클릭과 개인정보 입력을 유도하는 SMS/MMS 유형",
+      "keywords": ["과태료", "범칙금", "통보서", "벌점", "행정처분", "미납", "사실조회"],
+      "url_patterns": ["gov-penalty[.]example/notice", "efine-[random][.]example", "police-fine[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["[국제발신] 포함 문자", "공공기관명+URL 조합", "발신번호 변작", "010 대량문자"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 9월 KISA 경보: 과태료·범칙금·통보서·벌점 키워드로 사실 여부 조회를 유도하고, 악성앱 설치 또는 민감정보 입력을 요구하는 스미싱이 대량 탐지됨",
+      "recommended_action": ["링크 클릭 금지", "주민등록번호·인증번호 입력 금지", "보호나라 카카오톡 채널 또는 1394에 제보", "악성앱 설치 시 모바일 백신 검사 및 삭제"]
+    },
+    {
+      "type_name": "검찰·경찰·금감원 사칭 기관형 보이스피싱",
+      "description": "수사기관·금융감독기관을 사칭해 범죄 연루, 자산 검수, 안전계좌 이체를 요구하는 전화·문자 연계형",
+      "keywords": ["범죄 연루", "검찰청", "경찰청", "금융감독원", "자산 검수", "구속영장", "안전계좌"],
+      "url_patterns": ["spoofed-gov[.]example/case", "secure-investigation[.]example", "gov-case[.]example/app", "tinyurl[.]com/[random]"],
+      "sender_patterns": ["수사관·검사 직함 사칭", "070 또는 인터넷전화", "대표번호 변작", "카카오톡 오픈채팅 유도"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 경찰청 자료: 2030세대를 대상으로 기관사칭형 보이스피싱이 성행한다고 경고. 2025년 보이스피싱 피해액 중 기관사칭형 비중이 매우 큰 것으로 집계됨",
+      "recommended_action": ["통화 중 앱 설치 금지", "자산 검수·안전계좌 이체 요구 거절", "전화를 끊고 112 또는 1394로 확인", "원격제어앱 설치 여부 점검"]
+    },
+    {
+      "type_name": "SNS·카카오 계정탈취 스미싱",
+      "description": "카카오, 네이버, 인스타그램 등 계정 보호·로그인 제한·본인확인을 사칭해 계정 정보를 탈취하는 유형",
+      "keywords": ["계정 보호", "로그인 제한", "본인확인", "비정상 로그인", "인증번호", "보안 알림", "계정 정지"],
+      "url_patterns": ["kakao-login[.]example", "kakao-security[.]example", "naver-check[.]example", "instagram-help[.]example"],
+      "sender_patterns": ["카카오 고객센터 사칭", "SNS 기업명 사칭", "영문·한글 혼합 발신명", "단축 URL 포함"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 명절 사이버사기 주의 자료에서 SNS 기업 사칭 계정탈취형이 급증 유형으로 언급됨",
+      "recommended_action": ["문자 링크로 로그인 금지", "공식 앱에서 직접 보안 알림 확인", "인증번호 전달 금지", "비밀번호 변경 및 2단계 인증 설정"]
+    },
+    {
+      "type_name": "가족·지인 사칭 메신저피싱",
+      "description": "자녀·부모·친구를 사칭해 휴대폰 고장, 급전, 카드·상품권 구매, 신분증 사진 전송을 요구하는 카카오톡·문자 유형",
+      "keywords": ["엄마 나 폰 고장", "급히 송금", "친구 계좌", "상품권 사줘", "신분증 사진", "인증번호 보내줘", "대신 결제"],
+      "url_patterns": ["없음 또는 계좌번호 직접 전달", "gift-card[.]example/pay", "mobile-auth[.]example", "openchat[.]kakao[.]example"],
+      "sender_patterns": ["새 카카오톡 계정", "프로필 사진 도용", "지인 이름 사칭", "010 번호 변경 통보"],
+      "risk_level": "매우 높음",
+      "real_case_example": "경찰청·금융당국의 메신저피싱 예방 자료에서 가족·지인 사칭 후 금전·상품권·인증정보 요구 사례가 반복적으로 안내됨",
+      "recommended_action": ["기존 번호로 직접 전화 확인", "상품권 PIN 전달 금지", "신분증·카드 사진 전송 금지", "송금 전 가족 간 암호 확인"]
+    },
+    {
+      "type_name": "청첩장·부고장 지인사칭 스미싱",
+      "description": "모바일 청첩장, 부고 알림, 장례식장 안내 링크를 보내 악성앱 설치와 주소록 탈취를 유도하는 유형",
+      "keywords": ["모바일 청첩장", "부고 알림", "장례식장", "오시는 길", "결혼합니다", "별세", "조문 안내"],
+      "url_patterns": ["wedding-card[.]example", "obituary-info[.]example", "m-card[.]example/[random]", "bit[.]ly/[random]"],
+      "sender_patterns": ["실제 지인 번호 도용", "주소록 기반 2차 발송", "MMS 이미지+URL", "010 개인번호"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 관계당국 명절 주의 자료에서 청첩장·부고장 등 지인사칭형 스미싱 증가가 언급됨",
+      "recommended_action": ["링크 클릭 전 지인에게 직접 확인", "APK 설치 금지", "주소록 유출 의심 시 지인에게 즉시 고지", "피해 의심 시 1394 또는 KISA에 제보"]
+    },
+    {
+      "type_name": "택배·배송조회 사칭 스미싱",
+      "description": "택배 주소 오류, 배송 실패, 통관·반품 확인을 빙자해 악성 URL 접속을 유도하는 문자 유형",
+      "keywords": ["배송 실패", "주소 오류", "송장 확인", "반품 접수", "통관 보류", "택배 보관", "재배송"],
+      "url_patterns": ["cj-delivery[.]example", "post-track[.]example", "delivery-check[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["택배사명 사칭", "우체국 대표번호 변작", "010 대량 발송", "[국외발신] 배송 안내"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2026년 KISA·서울경찰청 공조 사례에서 우체국 등 신뢰도 높은 기관 대표번호를 도용한 카드 발급·택배 배송 안내 전화 정황이 확인됨",
+      "recommended_action": ["문자 링크 클릭 금지", "택배사 공식 앱에서 직접 조회", "앱 설치 파일 다운로드 금지", "번호 변작 의심 시 발신번호 거짓표시 신고"]
+    },
+    {
+      "type_name": "카드 발급·해외결제·미승인 결제 사칭",
+      "description": "카드 발급, 해외결제 승인, 결제 취소 문의를 유도해 전화 연결 또는 피싱사이트 접속을 유도하는 유형",
+      "keywords": ["해외결제", "미승인 결제", "카드 발급", "결제 취소", "승인 완료", "고객센터", "본인 사용 아님"],
+      "url_patterns": ["card-cancel[.]example", "pay-check[.]example", "ars-card[.]example", "short[.]url/[random]"],
+      "sender_patterns": ["카드사 고객센터 사칭", "대표번호 변작", "ARS 연결 유도", "070 상담번호"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2026년 KISA 보도자료에서 금융·공공기관 대표번호를 도용한 불법 문자·전화 발신 사례와 카드사 사칭 스팸 문자 사례가 언급됨",
+      "recommended_action": ["문자 내 번호로 전화 금지", "카드사 공식 앱·카드 뒷면 번호로 확인", "원격제어앱 설치 금지", "피해 시 즉시 지급정지 요청"]
+    },
+    {
+      "type_name": "대출 승인·저금리 대환대출 사기",
+      "description": "은행·캐피탈·정책금융을 사칭해 대출 승인, 한도 상향, 기존 대출 상환, 보증료·수수료 입금을 요구하는 유형",
+      "keywords": ["대출 승인", "한도 안내", "저금리 전환", "대환대출", "보증료", "채무조정", "긴급 처리"],
+      "url_patterns": ["bank-loan[.]example", "korea-finance[.]example/loan", "loan-mobile[.]example/app", "bit[.]ly/[random]"],
+      "sender_patterns": ["은행 직원 사칭", "캐피탈 상담원 사칭", "070 번호", "카카오톡 상담 채널 유도"],
+      "risk_level": "매우 높음",
+      "real_case_example": "금융당국 보이스피싱 예방 자료에서 정부지원 대출·채무조정 빙자형, 대출 유도형이 주요 피해 유형으로 안내됨",
+      "recommended_action": ["선입금·보증료 요구 거절", "문자 링크 앱 설치 금지", "금융회사 공식 대표번호로 재확인", "개인정보노출자 사고예방시스템 등록 검토"]
+    },
+    {
+      "type_name": "정부지원금·소비쿠폰·민생지원금 사칭",
+      "description": "지원금 대상자, 쿠폰 발급처, 카드사·지역화폐 신청을 사칭해 개인정보·금융정보 입력을 요구하는 유형",
+      "keywords": ["지원금", "소비쿠폰", "대상자", "쿠폰 발급처", "정부24", "지역화폐", "추가 지급"],
+      "url_patterns": ["gov24-coupon[.]example", "localpay-support[.]example", "card-benefit[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["정부24 사칭", "카드사 사칭", "지자체명 사칭", "[국제발신] 포함"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 7월 KISA 경보: 민생회복 소비쿠폰 지급 시기를 악용해 정부24·지역화폐 앱·카드사를 사칭하고 악성 URL 클릭을 유도하는 스미싱·피싱·보이스피싱 시도가 예상된다고 안내됨",
+      "recommended_action": ["지원금 문자의 URL 클릭 금지", "카드번호·비밀번호 입력 금지", "공식 앱·공식 홈페이지에서 직접 확인", "의심 메시지는 보호나라에 전달"]
+    },
+    {
+      "type_name": "이커머스 개인정보 유출·피해보상 사칭",
+      "description": "대형 쇼핑몰·플랫폼 개인정보 유출 사고를 악용해 피해보상, 조회, 환급을 명목으로 피싱사이트 접속을 유도하는 유형",
+      "keywords": ["개인정보 유출", "피해보상", "보상금", "피해사실 조회", "환급 신청", "쿠폰 지급", "고객 확인"],
+      "url_patterns": ["coupang-reward[.]example", "commerce-claim[.]example", "privacy-compensation[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["쇼핑몰 고객센터 사칭", "보상센터 사칭", "문자+전화 연계", "카카오톡 상담 유도"],
+      "risk_level": "높음",
+      "real_case_example": "2025~2026년 KISA·금융당국은 개인정보 유출 사고 이슈를 악용한 피해보상 사칭 전자금융사기와 피싱 가능성을 경고함",
+      "recommended_action": ["보상 안내 URL 클릭 금지", "공식 앱 공지사항에서 직접 확인", "카드정보·계좌정보 입력 금지", "개인정보 유출 의심 시 계좌·카드 신규발급 차단 서비스 활용"]
+    },
+    {
+      "type_name": "주민센터·등본 발급 시도 사칭",
+      "description": "주민센터를 사칭해 등본·초본 발급 시도, 명의도용 차단 신청을 빌미로 카카오톡 링크 또는 악성앱 설치를 유도하는 유형",
+      "keywords": ["등본 발급", "초본 발급", "명의도용", "주민센터", "본인확인", "차단 신청", "신용정보"],
+      "url_patterns": ["resident-center[.]example", "identity-block[.]example", "gov-cert[.]example/app", "kakao-channel[.]example/help"],
+      "sender_patterns": ["동 주민센터 사칭 전화", "가짜 대표번호", "카카오톡 채널 사칭", "복수 연락수단 연계"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2026년 4월 KISA 경보: 주민센터를 사칭해 '누군가 명의로 등본·초본 발급을 시도하고 있다'며 본인 확인과 악성앱 설치를 유도하는 사례가 확인됨",
+      "recommended_action": ["즉시 대응하지 말고 기관 공식번호로 확인", "카카오톡 링크 클릭 금지", "원격제어앱 설치 거절", "의심 전화·문자는 1394 또는 KISA 신고"]
+    },
+    {
+      "type_name": "금융·공공기관 대표번호 도용형",
+      "description": "실제 금융기관·공공기관 대표번호처럼 보이게 발신번호를 변작해 신뢰를 얻은 뒤 통화·문자 피싱으로 연결하는 유형",
+      "keywords": ["대표번호", "고객센터", "본인확인", "발급 안내", "배송 안내", "상담 연결", "확인 요청"],
+      "url_patterns": ["없음 또는 문자 후 전화 유도", "official-center[.]example", "ars-verify[.]example", "short[.]url/[random]"],
+      "sender_patterns": ["발신번호 거짓표시", "금융기관 대표번호 변작", "공공기관 대표번호 변작", "인터넷전화 기반 대량 발신"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2026년 5월 KISA·서울경찰청 공조: 금융·공공기관 대표번호를 도용해 보이스피싱 전화를 발신하고 불법 스팸 문자를 대량 발송한 통신사업자 검거 지원 사례 발표",
+      "recommended_action": ["표시된 번호만 믿지 않기", "기관 공식 홈페이지에서 번호 직접 확인", "통화 중 링크·앱 설치 거부", "발신번호 거짓표시 신고센터에 신고"]
+    },
+    {
+      "type_name": "가상자산 거래소 보상·오지급 사칭",
+      "description": "거래소 오지급, 보상금, 이벤트, 상품권 지급을 빙자해 피싱사이트 접속 또는 전화 상담을 유도하는 유형",
+      "keywords": ["오지급", "보상금", "피해사실 조회", "상품권 지급", "코인 지급", "거래소", "대상 여부 확인"],
+      "url_patterns": ["bithumb-check[.]example", "crypto-reward[.]example", "exchange-claim[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["거래소 고객센터 사칭", "유사 상호 오타 표기", "이미지 링크 포함", "상담번호 기재"],
+      "risk_level": "높음",
+      "real_case_example": "2026년 2월 금융당국 소비자경보: 빗썸 오지급 보상금 안내 메시지에 URL이 포함되어 있다면 사기로 보아야 한다고 안내함",
+      "recommended_action": ["거래소 보상 URL 클릭 금지", "문자 속 고객센터 번호 사용 금지", "공식 앱에서 직접 공지 확인", "자금 이체 피해 시 즉시 지급정지"]
+    },
+    {
+      "type_name": "피해구제·환급 대행 사칭 피싱사이트",
+      "description": "이미 사기 피해를 본 사람을 다시 노려 정부기관·구제기관·법률구제 서비스를 사칭하고 카드정보·메신저 접속을 요구하는 재피해 유형",
+      "keywords": ["사기피해", "구제신청", "피해금 환급", "피싱 피해", "회수 가능", "법률 지원", "접수 완료"],
+      "url_patterns": ["scam-relief[.]example", "gov-refund[.]example", "victim-help[.]example", "recovery-center[.]example"],
+      "sender_patterns": ["정부기관 로고 도용", "상담원 카카오톡 유도", "검색광고 노출", "가짜 접수번호 안내"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 7월 KISA 권고: 정부기관을 사칭해 사기 피해 구제 신청 접수를 유도하는 피싱사이트가 탐지되고, 카드정보 입력 또는 메신저 접속을 유도하는 사례가 확인됨",
+      "recommended_action": ["구제 대행 사이트에 카드정보 입력 금지", "검색광고 결과만 믿지 않기", "공식 기관 도메인 직접 확인", "2차 피해 의심 시 1394 신고"]
+    },
+    {
+      "type_name": "투자 리딩방·상품권·고수익 미끼",
+      "description": "무료 투자정보, 리딩방 초대, 상품권 지급, 수익 인증을 미끼로 단체방 가입과 송금을 유도하는 카카오톡·문자 유형",
+      "keywords": ["무료 리딩", "수익 보장", "급등주", "단체방 초대", "상품권 지급", "원금 보장", "고수익"],
+      "url_patterns": ["stock-room[.]example", "kakao-openchat[.]example/invite", "gift-event[.]example", "short[.]url/[random]"],
+      "sender_patterns": ["카카오톡 오픈채팅방 초대", "리딩방 매니저 사칭", "010 홍보 문자", "프로필 사진 도용"],
+      "risk_level": "높음",
+      "real_case_example": "2025년 명절 사이버사기 자료에서 투자·상품권 유형이 스미싱 신고·차단 유형 중 별도 분류로 언급됨. 2025~2026년 경찰청도 투자리딩방 등 민생침해 금융범죄 대응을 강조함",
+      "recommended_action": ["오픈채팅 투자방 입장 주의", "원금·수익 보장 문구 의심", "상품권 PIN 전달 금지", "투자금 송금 전 피싱 의심 신고"]
+    },
+    {
+      "type_name": "정부시스템 장애·대체시스템 설치 사칭",
+      "description": "정부시스템 장애, 대체 시스템 설치, 관련 정보 안내를 빙자해 URL 클릭과 악성앱 설치를 유도하는 유형",
+      "keywords": ["정부시스템 장애", "대체 시스템", "설치 안내", "복구 안내", "관련 정보", "긴급 공지", "확인 필요"],
+      "url_patterns": ["gov-system[.]example/install", "service-recovery[.]example", "public-notice[.]example", "bit[.]ly/[random]"],
+      "sender_patterns": ["정부·공공기관 사칭", "SNS 안내문자 사칭", "URL 포함 공지", "대량 문자"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 9월 KISA·행정안전부 보도: 정부시스템 장애 관련 URL 링크가 포함된 문자와 알림은 스미싱으로 보아야 하며, 정부·공공기관은 해당 안내에 URL을 포함하지 않는다고 안내함",
+      "recommended_action": ["정부 안내 문자 내 URL 클릭 금지", "공식 홈페이지를 직접 입력해 확인", "대체 앱 설치 금지", "보호나라 또는 1394에 제보"]
+    },
+    {
+      "type_name": "구인·알바·구매대행 사기 문자",
+      "description": "고수익 부업, 리뷰 알바, 구매대행, 쇼핑몰 정산을 빙자해 카카오톡 상담과 선입금을 유도하는 유형",
+      "keywords": ["부업 모집", "리뷰 알바", "구매대행", "재택근무", "당일 정산", "고수익", "선착순"],
+      "url_patterns": ["parttime-job[.]example", "review-work[.]example", "kakao-openchat[.]example/job", "shop-agent[.]example"],
+      "sender_patterns": ["010 대량문자", "카카오톡 ID 안내", "오픈채팅방 초대", "해외번호 또는 국제발신"],
+      "risk_level": "높음",
+      "real_case_example": "KISA 불법스팸대응센터는 아르바이트 모집 빙자, 투자유도, 불법대출 등 피싱·스팸 유형을 주요 악성스팸 범주로 안내함",
+      "recommended_action": ["선입금 요구 거절", "신분증·계좌정보 제출 금지", "오픈채팅방 링크 주의", "스팸·피싱 신고"]
+    },
+    {
+      "type_name": "몸캠피싱·로맨스스캠·해외취업 연계 피싱",
+      "description": "메신저·SNS에서 친밀감이나 취업 기회를 빙자한 뒤 영상·개인정보·금전을 요구하거나 협박하는 유형",
+      "keywords": ["영상통화", "친구 추가", "해외취업", "고수익 일자리", "연애", "협박", "유포"],
+      "url_patterns": ["dating-chat[.]example", "video-call-app[.]example/apk", "overseas-job[.]example", "messenger-contact[.]example"],
+      "sender_patterns": ["SNS DM", "카카오톡 친구추가 유도", "텔레그램 이동 유도", "해외번호"],
+      "risk_level": "매우 높음",
+      "real_case_example": "2025년 경찰청 피싱범죄 특별신고 자료에서 보이스피싱, 메신저피싱, 몸캠피싱, 웹 기반 연애사기 등이 신고 대상 유형으로 함께 언급됨",
+      "recommended_action": ["낯선 상대의 앱 설치 요구 거절", "영상·신분증 전송 금지", "협박금 송금 금지", "즉시 증거 보존 후 112 또는 1394 신고"]
+    }
+  ],
+  "data_sources": [
+    "KISA 한국인터넷진흥원: 2025-09-02 과태료·범칙금 등 행정처분 스미싱 주의 권고",
+    "KISA 한국인터넷진흥원: 2025-07-30 민생회복 소비쿠폰 지급 사칭 피싱 주의 권고",
+    "KISA 한국인터넷진흥원: 2025-09-30 URL 링크가 포함된 정부시스템 장애 관련 문자와 알림은 100% 스미싱",
+    "KISA 한국인터넷진흥원: 2026-04-29 등본 발급 시도됐다 주민센터 전화 피싱 주의",
+    "KISA 한국인터넷진흥원: 2026-05-15 금융·공공기관 대표번호 도용 보이스피싱·불법 스팸 문자 발송 통신사업자 검거 지원",
+    "KISA 한국인터넷진흥원: 2026-05-27 스미싱 피해 예방·공동 대응 기술 협약",
+    "경찰청 전기통신금융사기 통합대응단 피싱안심SOS: 전화·문자·변작 제보 유형 및 1394 신고체계",
+    "경찰청: 2025-09-18 2030세대 대상 기관사칭형 보이스피싱 성행 보도자료",
+    "경찰청: 2025-10-15 국외 납치·감금 의심 및 피싱범죄 특별자수·신고 기간 자료",
+    "금융위원회·금융감독원 등 금융당국: 2025-01-20 설 명절 문자사기·스미싱 등 사이버사기 주의 자료",
+    "금융위원회·금융감독원 등 금융당국: 2026-02-12 빗썸 오지급 보상 안내 URL 링크 사기 소비자경보",
+    "금융위원회·관계부처: 2025-12-30 보이스피싱 근절 종합대책 추진상황 점검"
+  ],
+  "last_updated": "2026-06-22"
+}
