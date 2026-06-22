@@ -84,7 +84,7 @@ agentic-player-10/
     │   │   ├── find_upcoming_events.py
     │   │   └── save_to_memo_chat.py
     │   └── data/                  # 정적 데이터 (사기 패턴 룰, 계절 키워드 등)
-    └── gift-curator/
+    └── gift_curator/
         ├── Dockerfile
         ├── server.py
         ├── tools/
@@ -189,7 +189,7 @@ def build_markdown_response(payload: dict, *, max_chars: int = 22000) -> str:
 표준 logging, JSON 포맷 (카카오클라우드 로그 수집).
 
 ```python
-logger = setup_logger("hyodo")  # or "gift-curator"
+logger = setup_logger("hyodo")  # or "gift_curator"
 logger.info("tool_call", extra={"tool": "compose_anbu", "duration_ms": 42})
 ```
 
@@ -309,7 +309,7 @@ def compose_anbu(
 - GitHub public repo `agentic-player-10` 하나
 - 각 서버는 Dockerfile 경로로 구분:
   - Hyodo: Git URL + Dockerfile 경로 `servers/hyodo/Dockerfile`
-  - Gift Curator: 같은 Git URL + Dockerfile 경로 `servers/gift-curator/Dockerfile`
+  - Gift Curator: 같은 Git URL + Dockerfile 경로 `servers/gift_curator/Dockerfile`
 
 ### 8.2 Dockerfile 패턴
 
@@ -412,7 +412,7 @@ PlayMCP in KC 등록 시 환경 변수 설정 화면에서 입력.
 ## 12. 관련 문서
 
 - `2026-06-22-hyodo-secretary-design.md` (작성 예정) — 효도비서 5개 Tool 풀 명세
-- `2026-06-22-gift-curator-design.md` (작성 예정) — 선물고민러 5개 Tool 풀 명세
+- `2026-06-22-gift_curator-design.md` (작성 예정) — 선물고민러 5개 Tool 풀 명세
 - `CLAUDE.md` — 사용자 협업 지침
 - 메모리 `reference_playmcp_*` — PlayMCP 공식 가이드 요약
 

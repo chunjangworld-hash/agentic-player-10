@@ -40,6 +40,6 @@ agentic-player-10/
 ├── docs/specs/        # Phase 1 산출물 — 설계 문서
 ├── servers/           # Phase 2 산출물 — MCP 서버 코드
 │   ├── hyodo/         # 효도비서
-│   └── gift-curator/  # 선물고민러
+│   └── gift_curator/  # 선물고민러
 └── CLAUDE.md          # Claude 작업 지침
 ```

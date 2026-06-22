@@ -293,7 +293,7 @@ refine_recommendation으로 새 방향 찾아드려요.
 
 **관련 데이터**:
 - `shared/ad_filter.py` — F1 광고 키워드 목록 + F4 다중 출처 집계
-- `servers/gift-curator/data/relationship_tone_map.json` — 관계별 톤 가이드
+- `servers/gift_curator/data/relationship_tone_map.json` — 관계별 톤 가이드
 
 ---
 
@@ -492,7 +492,7 @@ class ComposeGiftMessageInput(BaseModel):
 **응답 시간 예산**: <30ms (정적 템플릿)
 
 **관련 데이터**:
-- `servers/gift-curator/data/message_templates.json` — 관계 × 행사 × 톤 매트릭스
+- `servers/gift_curator/data/message_templates.json` — 관계 × 행사 × 톤 매트릭스
 
 ---
 
