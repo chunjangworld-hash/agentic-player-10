@@ -1,0 +1,277 @@
+{
+  "_meta": {
+    "purpose": "효도비서 compose_anbu, find_upcoming_events Tool의 시즌 컨텍스트 정적 데이터",
+    "scope": "한국 기준 — 양력 공휴일 + 24절기 + 일반적 시즌 화제 + 건강 주의사항",
+    "lunar_holidays_note": "음력 공휴일(설/추석/부처님오신날/대보름)은 매년 양력 날짜가 달라짐. lunar_calendar 라이브러리로 런타임 계산하거나, 매년 데이터 갱신 필요. 본 파일은 일반 시즌 정보만 정적 보관.",
+    "version": "1.0",
+    "last_updated": "2026-06-22"
+  },
+  "months": [
+    {
+      "month": 1,
+      "name": "1월",
+      "keywords": ["겨울", "한파", "새해", "감기", "설 명절 준비", "혹한기"],
+      "seasonal_events": [
+        {"name": "신정", "date_pattern": "1/1", "type": "공휴일"},
+        {"name": "소한", "date_pattern": "1/5~1/6", "type": "절기", "meaning": "본격적 한파 시작"},
+        {"name": "대한", "date_pattern": "1/20~1/21", "type": "절기", "meaning": "1년 중 가장 추운 시기"}
+      ],
+      "anbu_topics": [
+        "새해 인사 (안 늦었어요)",
+        "한파 안부 — 외출 줄이시고 따뜻하게",
+        "감기/독감 조심",
+        "설 명절 안부 (월말이면)"
+      ],
+      "health_seasonal_risks": [
+        "한파로 인한 혈관 수축 — 고혈압/심혈관 주의",
+        "실내외 온도차로 인한 감기",
+        "건조한 실내 — 보습 권장"
+      ]
+    },
+    {
+      "month": 2,
+      "name": "2월",
+      "keywords": ["입춘", "꽃샘추위", "설 명절", "정월대보름", "겨울 끝자락"],
+      "seasonal_events": [
+        {"name": "입춘", "date_pattern": "2/3~2/4", "type": "절기", "meaning": "봄의 시작 (이름만)"},
+        {"name": "우수", "date_pattern": "2/18~2/19", "type": "절기", "meaning": "눈 녹기 시작"}
+      ],
+      "anbu_topics": [
+        "설 명절 잘 보내셨는지",
+        "정월대보름 (음력 1/15)",
+        "꽃샘추위 — 일교차 조심",
+        "겨울옷 정리 시기"
+      ],
+      "health_seasonal_risks": [
+        "꽃샘추위 — 일교차 큰 시기",
+        "환절기 면역력 저하"
+      ]
+    },
+    {
+      "month": 3,
+      "name": "3월",
+      "keywords": ["봄 시작", "꽃샘추위", "황사", "미세먼지", "3·1절"],
+      "seasonal_events": [
+        {"name": "3·1절", "date_pattern": "3/1", "type": "공휴일"},
+        {"name": "경칩", "date_pattern": "3/5~3/6", "type": "절기", "meaning": "개구리 깨어남"},
+        {"name": "춘분", "date_pattern": "3/20~3/21", "type": "절기", "meaning": "낮밤 길이 같음"}
+      ],
+      "anbu_topics": [
+        "봄 인사 — 따뜻해지지 않으세요?",
+        "미세먼지 — 마스크 챙기시기",
+        "꽃샘추위 — 옷 잘 챙기시기",
+        "봄나물/봄 음식"
+      ],
+      "health_seasonal_risks": [
+        "황사·미세먼지 — 호흡기 주의",
+        "환절기 알레르기 (꽃가루 시작)",
+        "큰 일교차"
+      ]
+    },
+    {
+      "month": 4,
+      "name": "4월",
+      "keywords": ["봄꽃", "벚꽃", "어버이날 D-30", "환절기", "꽃놀이"],
+      "seasonal_events": [
+        {"name": "식목일", "date_pattern": "4/5", "type": "기념일"},
+        {"name": "청명", "date_pattern": "4/4~4/5", "type": "절기", "meaning": "맑고 깨끗한 봄"},
+        {"name": "곡우", "date_pattern": "4/19~4/20", "type": "절기", "meaning": "봄비 내림"}
+      ],
+      "anbu_topics": [
+        "봄꽃 안부 — 꽃 보러 가셨어요?",
+        "어버이날(5/8) 준비 — D-30 알림",
+        "황사·꽃가루 알레르기",
+        "산책 추천 — 따뜻해진 날씨"
+      ],
+      "health_seasonal_risks": [
+        "꽃가루 알레르기 본격화",
+        "환절기 감기·관절 통증"
+      ]
+    },
+    {
+      "month": 5,
+      "name": "5월",
+      "keywords": ["어버이날", "가정의 달", "어린이날", "스승의날", "초여름", "봄꽃 절정"],
+      "seasonal_events": [
+        {"name": "어린이날", "date_pattern": "5/5", "type": "공휴일"},
+        {"name": "어버이날", "date_pattern": "5/8", "type": "기념일", "importance": "최고"},
+        {"name": "스승의날", "date_pattern": "5/15", "type": "기념일"},
+        {"name": "부처님오신날", "date_pattern": "음력 4/8 (양력 5월중)", "type": "공휴일", "note": "매년 양력 날짜 변동"},
+        {"name": "입하", "date_pattern": "5/5~5/6", "type": "절기", "meaning": "여름 시작"},
+        {"name": "소만", "date_pattern": "5/20~5/21", "type": "절기"}
+      ],
+      "anbu_topics": [
+        "어버이날 — 가장 큰 효도 이벤트 (선물고민러 연계 추천)",
+        "어버이날 선물 준비 D-X",
+        "초여름 안부",
+        "가정의 달 인사"
+      ],
+      "health_seasonal_risks": [
+        "초여름 더위 시작 — 수분 섭취",
+        "꽃가루 절정"
+      ]
+    },
+    {
+      "month": 6,
+      "name": "6월",
+      "keywords": ["장마", "초여름", "현충일", "무릎 통증", "습도", "관절"],
+      "seasonal_events": [
+        {"name": "현충일", "date_pattern": "6/6", "type": "공휴일"},
+        {"name": "망종", "date_pattern": "6/5~6/6", "type": "절기"},
+        {"name": "하지", "date_pattern": "6/21~6/22", "type": "절기", "meaning": "1년 중 가장 긴 낮"}
+      ],
+      "anbu_topics": [
+        "장마 안부 — 우산 챙기시고",
+        "관절·허리 통증 안부 (장마 시기 악화)",
+        "현충일 인사",
+        "여름 더위 시작"
+      ],
+      "health_seasonal_risks": [
+        "장마로 인한 관절통 악화 (어르신)",
+        "습도 ↑ — 곰팡이·식중독",
+        "더위로 인한 혈압 변동"
+      ]
+    },
+    {
+      "month": 7,
+      "name": "7월",
+      "keywords": ["장마", "무더위", "초복", "제헌절", "여름 휴가", "열대야"],
+      "seasonal_events": [
+        {"name": "제헌절", "date_pattern": "7/17", "type": "기념일 (공휴일 X)"},
+        {"name": "소서", "date_pattern": "7/6~7/7", "type": "절기"},
+        {"name": "대서", "date_pattern": "7/22~7/23", "type": "절기", "meaning": "1년 중 가장 더운 시기"}
+      ],
+      "anbu_topics": [
+        "무더위 안부 — 시원하게 보내시기",
+        "삼복 (초복/중복) 보양식",
+        "장마 끝나가는 시기",
+        "열대야 — 수면 안부"
+      ],
+      "health_seasonal_risks": [
+        "열사병·일사병 (어르신 외출 주의)",
+        "열대야로 인한 수면 부족",
+        "냉방병 (실내외 온도차)"
+      ]
+    },
+    {
+      "month": 8,
+      "name": "8월",
+      "keywords": ["광복절", "말복", "휴가철", "입추", "처서", "무더위 절정"],
+      "seasonal_events": [
+        {"name": "광복절", "date_pattern": "8/15", "type": "공휴일"},
+        {"name": "입추", "date_pattern": "8/7~8/8", "type": "절기", "meaning": "가을 시작 (이름만)"},
+        {"name": "처서", "date_pattern": "8/22~8/23", "type": "절기", "meaning": "더위 한풀 꺾임"}
+      ],
+      "anbu_topics": [
+        "광복절 인사",
+        "휴가 잘 다녀오셨는지 / 안 다녀오셨으면 안부",
+        "무더위 끝자락 — 건강 체크",
+        "말복 보양식"
+      ],
+      "health_seasonal_risks": [
+        "지속된 무더위로 인한 탈수",
+        "처서 이후 일교차 시작"
+      ]
+    },
+    {
+      "month": 9,
+      "name": "9월",
+      "keywords": ["추석", "환절기", "일교차", "한가위", "가을 시작", "추분"],
+      "seasonal_events": [
+        {"name": "추석", "date_pattern": "음력 8/15 (양력 9월중 또는 10월초)", "type": "공휴일", "importance": "최고", "note": "매년 양력 날짜 변동"},
+        {"name": "백로", "date_pattern": "9/7~9/8", "type": "절기"},
+        {"name": "추분", "date_pattern": "9/22~9/23", "type": "절기", "meaning": "낮밤 길이 같음"}
+      ],
+      "anbu_topics": [
+        "추석 준비 / 추석 인사 — 두 번째 큰 효도 이벤트",
+        "추석 선물 준비 D-X (선물고민러 연계)",
+        "환절기 감기 조심",
+        "큰 일교차 — 옷 챙기시기"
+      ],
+      "health_seasonal_risks": [
+        "큰 일교차 — 감기/면역력 저하",
+        "추석 음식 — 과식·소화불량",
+        "독감 예방접종 시즌 시작"
+      ]
+    },
+    {
+      "month": 10,
+      "name": "10월",
+      "keywords": ["단풍", "개천절", "한글날", "노인의 날", "독감 예방접종", "가을 절정"],
+      "seasonal_events": [
+        {"name": "노인의 날", "date_pattern": "10/2", "type": "기념일", "importance": "효도 관련"},
+        {"name": "개천절", "date_pattern": "10/3", "type": "공휴일"},
+        {"name": "한글날", "date_pattern": "10/9", "type": "공휴일"},
+        {"name": "한로", "date_pattern": "10/8~10/9", "type": "절기", "meaning": "찬 이슬"},
+        {"name": "상강", "date_pattern": "10/23~10/24", "type": "절기", "meaning": "서리 내림"}
+      ],
+      "anbu_topics": [
+        "노인의 날 (10/2) — 효도 인사",
+        "단풍 구경 권유",
+        "독감 예방접종 안내",
+        "가을 환절기 안부"
+      ],
+      "health_seasonal_risks": [
+        "독감 시즌 시작 — 예방접종 권장",
+        "큰 일교차",
+        "관절 통증 (찬바람)"
+      ]
+    },
+    {
+      "month": 11,
+      "name": "11월",
+      "keywords": ["김장철", "초겨울", "감기", "독감", "일교차", "입동"],
+      "seasonal_events": [
+        {"name": "입동", "date_pattern": "11/7~11/8", "type": "절기", "meaning": "겨울 시작"},
+        {"name": "소설", "date_pattern": "11/22~11/23", "type": "절기", "meaning": "첫 눈"}
+      ],
+      "anbu_topics": [
+        "김장철 — 김장 하시는지 안부",
+        "초겨울 추위 — 옷 챙기시기",
+        "독감 유행 시작 — 백신 맞으셨는지",
+        "온돌·난방기 점검 안내"
+      ],
+      "health_seasonal_risks": [
+        "독감 유행 본격화",
+        "건조한 실내 — 보습",
+        "심혈관 — 갑작스러운 추위"
+      ]
+    },
+    {
+      "month": 12,
+      "name": "12월",
+      "keywords": ["크리스마스", "송년", "연말", "한파", "동지", "빙판길"],
+      "seasonal_events": [
+        {"name": "대설", "date_pattern": "12/6~12/7", "type": "절기"},
+        {"name": "동지", "date_pattern": "12/21~12/22", "type": "절기", "meaning": "1년 중 가장 긴 밤, 팥죽"},
+        {"name": "크리스마스", "date_pattern": "12/25", "type": "공휴일"}
+      ],
+      "anbu_topics": [
+        "연말 인사 — 한 해 잘 보내셨는지",
+        "송년 안부",
+        "한파 — 빙판길 조심하시기",
+        "크리스마스 인사",
+        "내년 새해 인사 예고"
+      ],
+      "health_seasonal_risks": [
+        "한파 — 혈관 수축, 심혈관 사고 위험",
+        "빙판길 — 낙상 위험 (특히 어르신)",
+        "독감·코로나 유행"
+      ]
+    }
+  ],
+  "general_health_categories": [
+    "혈압·심혈관",
+    "관절·허리·무릎",
+    "면역력·감기",
+    "수면·피로",
+    "소화·식사",
+    "정서·외로움"
+  ],
+  "usage_notes": [
+    "compose_anbu Tool에서: 현재 달의 anbu_topics + parent_brief의 건강 컨텍스트를 결합해 메시지 템플릿 후보 생성",
+    "find_upcoming_events Tool에서: 현재 달부터 upcoming_days 안의 seasonal_events 추출 + parent_brief에서 개인 기념일(생신/환갑 등) 추출",
+    "음력 공휴일(설/추석)은 별도 lunar 계산 필요 — Phase 2.1에서 lunar 라이브러리 결정",
+    "이 데이터는 정적이므로 외부 API 호출 없이 즉시 사용 가능 — compose_anbu 응답 시간 <50ms 보장"
+  ]
+}

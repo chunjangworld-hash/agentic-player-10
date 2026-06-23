@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from servers.hyodo.tools import compose_parent_warning, save_to_memo_chat
+from servers.hyodo.tools import compose_anbu, compose_parent_warning, save_to_memo_chat
 
 if TYPE_CHECKING:
     from mcp.server.fastmcp import FastMCP
@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 _TOOL_MODULES = [
     save_to_memo_chat,
     compose_parent_warning,
+    compose_anbu,
 ]
 
 
