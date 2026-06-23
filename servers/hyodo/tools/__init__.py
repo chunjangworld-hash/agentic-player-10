@@ -12,6 +12,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from servers.hyodo.tools import (
+    check_suspicious_message,
     compose_anbu,
     compose_parent_warning,
     find_upcoming_events,
@@ -26,6 +27,7 @@ _TOOL_MODULES = [
     compose_parent_warning,
     compose_anbu,
     find_upcoming_events,
+    check_suspicious_message,
 ]
 
 
