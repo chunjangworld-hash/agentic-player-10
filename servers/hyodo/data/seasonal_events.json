@@ -41,7 +41,13 @@
     {"id": "gwangbokjeol", "name": "광복절", "date_approx": "08-15", "category": "공휴일"},
     {"id": "gaecheonjeol", "name": "개천절", "date_approx": "10-03", "category": "공휴일"},
     {"id": "hangeullal", "name": "한글날", "date_approx": "10-09", "category": "공휴일"},
-    {"id": "seongtanjeol", "name": "성탄절", "date_approx": "12-25", "category": "공휴일"}
+    {"id": "seongtanjeol", "name": "성탄절", "date_approx": "12-25", "category": "공휴일"},
+    {"id": "valentine_day", "name": "발렌타인데이", "date_approx": "02-14", "category": "기념일"},
+    {"id": "white_day", "name": "화이트데이", "date_approx": "03-14", "category": "기념일"},
+    {"id": "noin_day", "name": "노인의 날", "date_approx": "10-02", "category": "기념일"},
+    {"id": "pepero_day", "name": "빼빼로데이", "date_approx": "11-11", "category": "기념일"},
+    {"id": "christmas_eve", "name": "크리스마스 이브", "date_approx": "12-24", "category": "기념일"},
+    {"id": "couple_day", "name": "부부의 날", "date_approx": "05-21", "category": "기념일"}
   ],
   "lunar_events": [
     {"id": "seollal", "name": "설날", "date_lunar": "01-01", "category": "명절"},
