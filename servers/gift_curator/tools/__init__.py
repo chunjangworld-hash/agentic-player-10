@@ -7,13 +7,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from servers.gift_curator.tools import compose_gift_message
+from servers.gift_curator.tools import compose_gift_message, find_real_recommendations
 
 if TYPE_CHECKING:
     from mcp.server.fastmcp import FastMCP
 
 _TOOL_MODULES: list = [
     compose_gift_message,
+    find_real_recommendations,
 ]
 
 
