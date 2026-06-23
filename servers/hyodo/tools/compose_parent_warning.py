@@ -67,7 +67,7 @@ def _resolve_scam_type_id(scam_type: str) -> str | None:
     best_id: str | None = None
     best_hits = 0
     for scam_id, keywords in _SCAM_TYPE_KEYWORDS.items():
-        hits = sum(1 for kw in keywords if kw in text or kw.lower() in text)
+        hits = sum(1 for kw in keywords if kw in text)
         if hits > best_hits:
             best_hits = hits
             best_id = scam_id
