@@ -1,55 +1,570 @@
 {
   "_meta": {
     "purpose": "광고/협찬/체험단 식별 키워드 마스터 목록. shared/ad_filter.py의 F1 룰셋에 사용.",
-    "source": "GPT 외주 결과 (2026-06-22). 한국 SNS·블로그·맘카페·인스타·유튜브 광고 표시 패턴.",
+    "source": "v1 (2026-06-22 GPT) + v2 (2026-06-23 GPT-5 + Gemini 외주 합본, 중복 제거 + 보수적 등급 채택)",
+    "version": "v2",
     "categories": 5,
-    "total_keywords": 35,
+    "total_keywords": 137,
     "confidence_levels": "강 / 중 / 약 — 강은 거의 확실한 광고 신호, 약은 보조 신호",
-    "usage": "각 검색 결과 텍스트에 대해 모든 키워드를 검사. 매칭 시 confidence에 따라 가중치 부여 후 제거 결정"
+    "usage": "각 검색 결과 텍스트에 대해 모든 키워드를 검사. 매칭 시 confidence에 따라 가중치 부여 후 제거 결정",
+    "philosophy": "False positive 방어 — 두 소스에서 confidence가 다르면 더 낮은(보수적) 등급 채택"
   },
   "explicit_ad": [
-    {"keyword": "#광고", "confidence": "강"},
-    {"keyword": "광고", "confidence": "강"},
-    {"keyword": "유료광고", "confidence": "강"},
-    {"keyword": "유료광고 포함", "confidence": "강"},
-    {"keyword": "상업광고", "confidence": "강"},
-    {"keyword": "#협찬광고", "confidence": "강"},
-    {"keyword": "AD", "confidence": "약"}
+    {
+      "keyword": "#PaidAd",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#paidpartnership",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#소정의수수료",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#유료파트너십",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#협찬광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "Paid partnership",
+      "confidence": "강"
+    },
+    {
+      "keyword": "광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "광고 포함 게시물",
+      "confidence": "강"
+    },
+    {
+      "keyword": "광고입니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "본 게시물은 광고입니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "상업광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "유료 광고 콘텐츠",
+      "confidence": "강"
+    },
+    {
+      "keyword": "유료광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "유료광고 포함",
+      "confidence": "강"
+    },
+    {
+      "keyword": "이 영상은 유료 광고를 포함하고 있습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "일정액의 수수료를 제공받습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제휴 광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제휴마케팅의 일환으로",
+      "confidence": "강"
+    },
+    {
+      "keyword": "쿠팡 파트너스 활동의 일환",
+      "confidence": "강"
+    },
+    {
+      "keyword": "협찬 광고",
+      "confidence": "강"
+    },
+    {
+      "keyword": "#sponsored",
+      "confidence": "중"
+    },
+    {
+      "keyword": "#브랜드협업",
+      "confidence": "중"
+    },
+    {
+      "keyword": "#스폰서드",
+      "confidence": "중"
+    },
+    {
+      "keyword": "paid partnership",
+      "confidence": "중"
+    },
+    {
+      "keyword": "브랜드 콘텐츠",
+      "confidence": "중"
+    },
+    {
+      "keyword": "스폰서드",
+      "confidence": "중"
+    },
+    {
+      "keyword": "AD",
+      "confidence": "약"
+    }
   ],
   "experience_team": [
-    {"keyword": "체험단", "confidence": "강"},
-    {"keyword": "리뷰단", "confidence": "강"},
-    {"keyword": "서포터즈", "confidence": "중"},
-    {"keyword": "모니터단", "confidence": "중"},
-    {"keyword": "원고료", "confidence": "강"},
-    {"keyword": "후기 작성을 조건으로", "confidence": "강"},
-    {"keyword": "체험 후 작성", "confidence": "중"}
+    {
+      "keyword": "리뷰 미션",
+      "confidence": "강"
+    },
+    {
+      "keyword": "리뷰단",
+      "confidence": "강"
+    },
+    {
+      "keyword": "리뷰어 선정",
+      "confidence": "강"
+    },
+    {
+      "keyword": "리뷰어 활동",
+      "confidence": "강"
+    },
+    {
+      "keyword": "무상으로 지원받아 작성된",
+      "confidence": "강"
+    },
+    {
+      "keyword": "브랜드 앰버서더",
+      "confidence": "강"
+    },
+    {
+      "keyword": "서비스를 무상 제공받았으나",
+      "confidence": "강"
+    },
+    {
+      "keyword": "서포터즈 활동",
+      "confidence": "강"
+    },
+    {
+      "keyword": "앰버서더 활동",
+      "confidence": "강"
+    },
+    {
+      "keyword": "원고료",
+      "confidence": "강"
+    },
+    {
+      "keyword": "체험권 제공",
+      "confidence": "강"
+    },
+    {
+      "keyword": "체험단",
+      "confidence": "강"
+    },
+    {
+      "keyword": "체험단 선정",
+      "confidence": "강"
+    },
+    {
+      "keyword": "체험단에 선정되어",
+      "confidence": "강"
+    },
+    {
+      "keyword": "포스팅 미션",
+      "confidence": "강"
+    },
+    {
+      "keyword": "후기 작성을 조건으로",
+      "confidence": "강"
+    },
+    {
+      "keyword": "리뷰이벤트 참여",
+      "confidence": "중"
+    },
+    {
+      "keyword": "모니터단",
+      "confidence": "중"
+    },
+    {
+      "keyword": "블로그체험단",
+      "confidence": "중"
+    },
+    {
+      "keyword": "서포터즈",
+      "confidence": "중"
+    },
+    {
+      "keyword": "신제품 피드백용으로",
+      "confidence": "중"
+    },
+    {
+      "keyword": "얼리버드 리뷰어",
+      "confidence": "중"
+    },
+    {
+      "keyword": "인스타체험단",
+      "confidence": "중"
+    },
+    {
+      "keyword": "제품 체험 기회",
+      "confidence": "중"
+    },
+    {
+      "keyword": "체험 후 작성",
+      "confidence": "중"
+    },
+    {
+      "keyword": "캠페인 참여",
+      "confidence": "중"
+    },
+    {
+      "keyword": "품평단 참여",
+      "confidence": "중"
+    }
   ],
   "group_buy": [
-    {"keyword": "공동구매", "confidence": "강"},
-    {"keyword": "공구", "confidence": "강"},
-    {"keyword": "공구 오픈", "confidence": "강"},
-    {"keyword": "공구 마감", "confidence": "중"},
-    {"keyword": "단톡방 공구", "confidence": "중"},
-    {"keyword": "맘카페 공구", "confidence": "중"},
-    {"keyword": "프로필 링크 구매", "confidence": "약"}
+    {
+      "keyword": "공구",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공구 링크",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공구 마켓 오픈",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공구 오픈",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공구가",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공동구매",
+      "confidence": "강"
+    },
+    {
+      "keyword": "공동구매 진행합니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "오늘만 공구가",
+      "confidence": "강"
+    },
+    {
+      "keyword": "오픈채팅 공구",
+      "confidence": "강"
+    },
+    {
+      "keyword": "최저가 공구 오픈",
+      "confidence": "강"
+    },
+    {
+      "keyword": "DM 공구",
+      "confidence": "중"
+    },
+    {
+      "keyword": "DM 주시면 링크",
+      "confidence": "중"
+    },
+    {
+      "keyword": "공구 마감",
+      "confidence": "중"
+    },
+    {
+      "keyword": "공구 마감 임박",
+      "confidence": "중"
+    },
+    {
+      "keyword": "공구 문의",
+      "confidence": "중"
+    },
+    {
+      "keyword": "공구 참여",
+      "confidence": "중"
+    },
+    {
+      "keyword": "공구방",
+      "confidence": "중"
+    },
+    {
+      "keyword": "단독 특가 앵콜",
+      "confidence": "중"
+    },
+    {
+      "keyword": "단톡방 공구",
+      "confidence": "중"
+    },
+    {
+      "keyword": "댓글 공구",
+      "confidence": "중"
+    },
+    {
+      "keyword": "맘카페 공구",
+      "confidence": "중"
+    },
+    {
+      "keyword": "스토리 하이라이트에 링크",
+      "confidence": "중"
+    },
+    {
+      "keyword": "프로필 링크에서 구매",
+      "confidence": "중"
+    },
+    {
+      "keyword": "프로필 링크트리 클릭",
+      "confidence": "중"
+    },
+    {
+      "keyword": "비밀댓글로 링크 공유",
+      "confidence": "약"
+    },
+    {
+      "keyword": "프로필 링크 구매",
+      "confidence": "약"
+    },
+    {
+      "keyword": "한정 수량 마감 임박",
+      "confidence": "약"
+    }
   ],
   "sponsorship_disclosure": [
-    {"keyword": "협찬받았습니다", "confidence": "강"},
-    {"keyword": "제공받았습니다", "confidence": "강"},
-    {"keyword": "무료로 제공받았습니다", "confidence": "강"},
-    {"keyword": "업체로부터 제공받아", "confidence": "강"},
-    {"keyword": "브랜드로부터 제공받아", "confidence": "강"},
-    {"keyword": "소정의 원고료를 지급받아", "confidence": "강"},
-    {"keyword": "후원받았습니다", "confidence": "중"}
+    {
+      "keyword": "구매 시 수수료를 받을 수 있습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "금전적 지원을 받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "단순 협찬 제품입니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "대여 및 소정의 원고료",
+      "confidence": "강"
+    },
+    {
+      "keyword": "무료 체험권을 제공받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "무료로 제공받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "무상으로 제공받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "브랜드 기프트로 제공받은",
+      "confidence": "강"
+    },
+    {
+      "keyword": "브랜드 협찬을 받아",
+      "confidence": "강"
+    },
+    {
+      "keyword": "브랜드로부터 제공받아",
+      "confidence": "강"
+    },
+    {
+      "keyword": "브랜드로부터 협찬을 받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "서비스를 제공받아 작성했습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "소정의 수수료를 지급받습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "소정의 원고료를 지급받아",
+      "confidence": "강"
+    },
+    {
+      "keyword": "업체 지원으로 작성했습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "업체로부터 제공받아",
+      "confidence": "강"
+    },
+    {
+      "keyword": "업체로부터 제품 지원",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제공받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제작비 지원",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제작비를 지원받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "제품을 제공받아 작성했습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "콘텐츠 제작 협찬",
+      "confidence": "강"
+    },
+    {
+      "keyword": "파트너스 활동을 통해 수수료를 제공받습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "행사에 초청받아 제품을 제공",
+      "confidence": "강"
+    },
+    {
+      "keyword": "협찬받았습니다",
+      "confidence": "강"
+    },
+    {
+      "keyword": "기프트로 받아서 써봄",
+      "confidence": "중"
+    },
+    {
+      "keyword": "후원받았습니다",
+      "confidence": "중"
+    }
   ],
   "implicit_signals": [
-    {"keyword": "체험기 + 일방적 긍정 평가", "confidence": "약"},
-    {"keyword": "동일 시기 다중 블로그 동시 게시", "confidence": "중"},
-    {"keyword": "동일 문구 반복 후기", "confidence": "중"},
-    {"keyword": "구매 링크 반복 삽입", "confidence": "중"},
-    {"keyword": "할인코드 제공", "confidence": "중"},
-    {"keyword": "댓글 문의 유도", "confidence": "약"},
-    {"keyword": "내돈내산 강조 + 협찬 이력 존재", "confidence": "중"}
+    {
+      "keyword": "쿠폰코드와 구매 링크 동시 제공",
+      "confidence": "강"
+    },
+    {
+      "keyword": "구매 링크 반복 삽입",
+      "confidence": "중"
+    },
+    {
+      "keyword": "구매 링크가 댓글 고정",
+      "confidence": "중"
+    },
+    {
+      "keyword": "내돈내산 강조 + 협찬 이력 존재",
+      "confidence": "중"
+    },
+    {
+      "keyword": "더보기 아래에 협찬 표시",
+      "confidence": "중"
+    },
+    {
+      "keyword": "더보기란 링크 참조",
+      "confidence": "중"
+    },
+    {
+      "keyword": "동일 문구 반복 후기",
+      "confidence": "중"
+    },
+    {
+      "keyword": "동일 시기 다중 블로그 동시 게시",
+      "confidence": "중"
+    },
+    {
+      "keyword": "동일 제품 새상품을 당근에 반복 등록",
+      "confidence": "중"
+    },
+    {
+      "keyword": "본문 끝부분에만 광고 표기",
+      "confidence": "중"
+    },
+    {
+      "keyword": "사용 후기 없이 판매 링크만 강조",
+      "confidence": "중"
+    },
+    {
+      "keyword": "영상 중간 짧은 협찬 자막만 노출",
+      "confidence": "중"
+    },
+    {
+      "keyword": "제품 정보는 프로필 링크에",
+      "confidence": "중"
+    },
+    {
+      "keyword": "중고 플랫폼에서 판매자 상품 라인업이 과도하게 유사",
+      "confidence": "중"
+    },
+    {
+      "keyword": "할인코드 제공",
+      "confidence": "중"
+    },
+    {
+      "keyword": "해시태그 사이에 광고 표기 숨김",
+      "confidence": "중"
+    },
+    {
+      "keyword": "협찬은 맞지만 솔직하게",
+      "confidence": "중"
+    },
+    {
+      "keyword": "내돈내산은 아니고 친한 지인이",
+      "confidence": "약"
+    },
+    {
+      "keyword": "당근 이웃분들께만 공유하는 꿀팁",
+      "confidence": "약"
+    },
+    {
+      "keyword": "댓글 달아주시면 좌표 공유",
+      "confidence": "약"
+    },
+    {
+      "keyword": "댓글 문의 유도",
+      "confidence": "약"
+    },
+    {
+      "keyword": "뒷광고 아님",
+      "confidence": "약"
+    },
+    {
+      "keyword": "뒷광고 아님을 과하게 강조",
+      "confidence": "약"
+    },
+    {
+      "keyword": "브랜드명 반복 언급",
+      "confidence": "약"
+    },
+    {
+      "keyword": "소문듣고 찾아간 업체",
+      "confidence": "약"
+    },
+    {
+      "keyword": "속는 셈 치고 샀는데",
+      "confidence": "약"
+    },
+    {
+      "keyword": "제가 아는 사장님이 직접",
+      "confidence": "약"
+    },
+    {
+      "keyword": "체험기 + 일방적 긍정 평가",
+      "confidence": "약"
+    }
   ]
 }
