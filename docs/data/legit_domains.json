@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "purpose": "check_suspicious_message Tool에서 오타 도메인(typosquatting) 검출용 한국 정상 기관 도메인 화이트리스트",
+    "source": "각 기관 공식 사이트에서 직접 확인 (2026-06-23)",
+    "version": "v1",
+    "added_date": "2026-06-23",
+    "usage_note": "메시지에 포함된 URL의 도메인을 추출 후, 이 화이트리스트와 Levenshtein distance 비교. distance 1~2면 오타 의심으로 사용자에게 경고.",
+    "policy": "확실히 알려진 도메인만 포함. 추측 금지. 누락이 있더라도 false positive를 늘리지 않는 방향으로 운영."
+  },
+  "banks": [
+    "kbstar.com",
+    "shinhan.com",
+    "wooribank.com",
+    "hanabank.com",
+    "nonghyup.com",
+    "ibk.co.kr",
+    "kdbbank.co.kr",
+    "standardchartered.co.kr",
+    "citibank.co.kr",
+    "kakaobank.com",
+    "kbank.com",
+    "tossbank.com"
+  ],
+  "card_companies": [
+    "kbcard.com",
+    "shinhancard.com",
+    "samsungcard.com",
+    "hyundaicard.com",
+    "lottecard.co.kr",
+    "hanacard.co.kr",
+    "bccard.com",
+    "nhcard.co.kr"
+  ],
+  "government": [
+    "gov.kr",
+    "police.go.kr",
+    "nts.go.kr",
+    "kisa.or.kr",
+    "msit.go.kr",
+    "moel.go.kr",
+    "hira.or.kr",
+    "nhis.or.kr",
+    "nps.or.kr",
+    "court.go.kr"
+  ],
+  "couriers": [
+    "cjlogistics.com",
+    "epost.go.kr",
+    "lotteglogis.com",
+    "hanjin.co.kr",
+    "logen.co.kr",
+    "kdexp.com"
+  ],
+  "telecoms": [
+    "kt.com",
+    "sktelecom.com",
+    "lguplus.com"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "purpose": "compose_anbu Tool에서 톤별 안부 메시지 템플릿 후보. {relation}, {season_event}, {weather_note}, {health_concern} 등 placeholder를 호출 시점에 치환.",
+    "version": "v1",
+    "added_date": "2026-06-23",
+    "placeholder_vars": ["{relation}", "{season_event}", "{weather_note}", "{health_concern}", "{topic}"],
+    "tone_definitions": {
+      "warm_polite": "정중하고 다정한 일상 카톡 톤. 30~40대 자녀가 부모님께 보내는 자연스러운 어투.",
+      "brief": "짧고 담백한 한 줄. 자주 연락하는 사이의 가벼운 안부.",
+      "playful": "장난기 섞인 친근한 톤. 사이가 편한 부모-자녀, 혹은 막내 자녀 톤."
+    },
+    "anti_pattern": "시혜적 표현 금지 — '효도하세요', '챙겨드리세요', '위로해드리세요', '보살펴 드려야' 같은 자기 미화 표현 절대 사용 안 함. 자녀가 부모님께 직접 보내는 일상 메시지처럼 자연스러워야 함."
+  },
+  "warm_polite": [
+    {"template": "{relation}, {season_event} 잘 보내고 계세요?", "context": "event"},
+    {"template": "{relation}, 요즘 {weather_note} 별일 없으시죠?", "context": "weather"},
+    {"template": "{relation}, {weather_note} 옷차림 따뜻하게 챙기세요", "context": "weather"},
+    {"template": "{relation}, 오랜만에 연락드려요. 별일 없으시죠?", "context": "general"},
+    {"template": "{relation}, {topic} 잘 다녀오셨어요?", "context": "general"},
+    {"template": "{relation}, 요새 {health_concern} 괜찮으세요?", "context": "health"},
+    {"template": "{relation}, {season_event} 음식 너무 무리해서 하지 마세요", "context": "event"},
+    {"template": "{relation}, {weather_note} 외출하실 때 조심하세요", "context": "weather"},
+    {"template": "{relation}, 이번 주말에 시간 되시면 통화 한 번 해요", "context": "general"},
+    {"template": "{relation}, {topic} 하셨다고 들었어요. 어떠셨어요?", "context": "hobby"}
+  ],
+  "brief": [
+    {"template": "{relation}, {weather_note}!", "context": "weather"},
+    {"template": "{relation} 별일 없으시죠", "context": "general"},
+    {"template": "{relation}, {season_event} 잘 보내세요", "context": "event"},
+    {"template": "잘 지내시죠?", "context": "general"},
+    {"template": "{relation}, {health_concern} 어떠세요", "context": "health"},
+    {"template": "{relation}, 식사 챙기세요", "context": "general"},
+    {"template": "{weather_note} 조심하세요", "context": "weather"},
+    {"template": "{relation}, 오늘 어떠셨어요?", "context": "general"},
+    {"template": "{relation} {topic} 어땠어요?", "context": "hobby"}
+  ],
+  "playful": [
+    {"template": "{relation}~ 살아계신가요ㅋㅋ", "context": "general"},
+    {"template": "{relation}, {weather_note} 진짜 너무함요 ㅠㅠ", "context": "weather"},
+    {"template": "{relation}, {season_event}인데 뭐 드시고 계심?", "context": "event"},
+    {"template": "{relation} {topic} 사진 좀 보내봐요", "context": "hobby"},
+    {"template": "{relation}, 저 보고 싶죠? ㅎㅎ", "context": "general"},
+    {"template": "{relation}, {health_concern} 조심하셔야 해요 진짜로", "context": "health"},
+    {"template": "{relation}~ {weather_note}니까 이불 밖은 위험해요", "context": "weather"},
+    {"template": "{relation}, {season_event} 끝나면 우리 뭐 먹으러 가요", "context": "event"},
+    {"template": "{relation}~ 오늘도 평화로우신가요", "context": "general"},
+    {"template": "{relation}, 답장 안 하면 전화 갑니다 ㅋㅋ", "context": "general"}
+  ]
+}
