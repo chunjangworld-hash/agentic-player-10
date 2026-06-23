@@ -1,8 +1,14 @@
 """Hyodo Secretary(효도비서) MCP Server.
 
 ⚠️ Phase 2.1: 골격만. Tool은 Phase 2.2에서 추가.
+
+포트:
+- 기본 8000. 환경변수 FASTMCP_PORT 로 오버라이드 (Docker/카카오클라우드 배포 호환).
+- 로컬에서 선물고민러와 동시 실행 시 자동 분리 (각자 다른 디폴트).
 """
 from __future__ import annotations
+
+import os
 
 from mcp.server.fastmcp import FastMCP
 
@@ -17,6 +23,8 @@ mcp = FastMCP(
         "안부 메시지 생성과 의심 메시지 사기 판단이 두 핵심 기능. "
         "모든 Tool은 빠른 데이터 조회/포맷팅만 — 자연어 추론은 호출 에이전트가 담당."
     ),
+    port=int(os.environ.get("FASTMCP_PORT", 8000)),
+    host=os.environ.get("FASTMCP_HOST", "127.0.0.1"),
 )
 
 
