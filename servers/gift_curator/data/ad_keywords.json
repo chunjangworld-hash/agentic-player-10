@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "purpose": "광고/협찬/체험단 식별 키워드 마스터 목록. shared/ad_filter.py의 F1 룰셋에 사용.",
+    "source": "GPT 외주 결과 (2026-06-22). 한국 SNS·블로그·맘카페·인스타·유튜브 광고 표시 패턴.",
+    "categories": 5,
+    "total_keywords": 35,
+    "confidence_levels": "강 / 중 / 약 — 강은 거의 확실한 광고 신호, 약은 보조 신호",
+    "usage": "각 검색 결과 텍스트에 대해 모든 키워드를 검사. 매칭 시 confidence에 따라 가중치 부여 후 제거 결정"
+  },
+  "explicit_ad": [
+    {"keyword": "#광고", "confidence": "강"},
+    {"keyword": "광고", "confidence": "강"},
+    {"keyword": "유료광고", "confidence": "강"},
+    {"keyword": "유료광고 포함", "confidence": "강"},
+    {"keyword": "상업광고", "confidence": "강"},
+    {"keyword": "#협찬광고", "confidence": "강"},
+    {"keyword": "AD", "confidence": "약"}
+  ],
+  "experience_team": [
+    {"keyword": "체험단", "confidence": "강"},
+    {"keyword": "리뷰단", "confidence": "강"},
+    {"keyword": "서포터즈", "confidence": "중"},
+    {"keyword": "모니터단", "confidence": "중"},
+    {"keyword": "원고료", "confidence": "강"},
+    {"keyword": "후기 작성을 조건으로", "confidence": "강"},
+    {"keyword": "체험 후 작성", "confidence": "중"}
+  ],
+  "group_buy": [
+    {"keyword": "공동구매", "confidence": "강"},
+    {"keyword": "공구", "confidence": "강"},
+    {"keyword": "공구 오픈", "confidence": "강"},
+    {"keyword": "공구 마감", "confidence": "중"},
+    {"keyword": "단톡방 공구", "confidence": "중"},
+    {"keyword": "맘카페 공구", "confidence": "중"},
+    {"keyword": "프로필 링크 구매", "confidence": "약"}
+  ],
+  "sponsorship_disclosure": [
+    {"keyword": "협찬받았습니다", "confidence": "강"},
+    {"keyword": "제공받았습니다", "confidence": "강"},
+    {"keyword": "무료로 제공받았습니다", "confidence": "강"},
+    {"keyword": "업체로부터 제공받아", "confidence": "강"},
+    {"keyword": "브랜드로부터 제공받아", "confidence": "강"},
+    {"keyword": "소정의 원고료를 지급받아", "confidence": "강"},
+    {"keyword": "후원받았습니다", "confidence": "중"}
+  ],
+  "implicit_signals": [
+    {"keyword": "체험기 + 일방적 긍정 평가", "confidence": "약"},
+    {"keyword": "동일 시기 다중 블로그 동시 게시", "confidence": "중"},
+    {"keyword": "동일 문구 반복 후기", "confidence": "중"},
+    {"keyword": "구매 링크 반복 삽입", "confidence": "중"},
+    {"keyword": "할인코드 제공", "confidence": "중"},
+    {"keyword": "댓글 문의 유도", "confidence": "약"},
+    {"keyword": "내돈내산 강조 + 협찬 이력 존재", "confidence": "중"}
+  ]
+}
