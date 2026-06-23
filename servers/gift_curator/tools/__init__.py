@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 
 from servers.gift_curator.tools import (
     compose_gift_message,
+    curate_gifts,
     evaluate_gift_idea,
     find_real_recommendations,
 )
@@ -20,6 +21,7 @@ _TOOL_MODULES: list = [
     compose_gift_message,
     find_real_recommendations,
     evaluate_gift_idea,
+    curate_gifts,
 ]
 
 
