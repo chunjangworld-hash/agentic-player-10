@@ -52,3 +52,27 @@ def save_to_memo_chat(inp: SaveToMemoChatInput) -> str:
         ("---", 1),
         (footer, 2),
     ])
+
+
+def register(mcp) -> None:
+    """FastMCP Tool 등록. server.py의 register_all(mcp)에서 호출."""
+
+    @mcp.tool(
+        description=(
+            "Hyodo Secretary(효도비서). Format a Hyodo Secretary result "
+            "(greeting message, scam warning, event reminder) into a clean text "
+            "block ready for saving to the user's KakaoTalk MemoChat (나와의 채팅방). "
+            "Returns the formatted text only. Does not call MemoChat MCP directly - "
+            "the calling agent should pass this output to MemoChat MCP's MemoChat tool. "
+            "Use this when the user explicitly wants to save a Hyodo Secretary result for later reference."
+        ),
+        annotations={
+            "title": "결과를 나챗방에 저장",
+            "readOnlyHint": True,
+            "destructiveHint": False,
+            "openWorldHint": False,
+            "idempotentHint": True,
+        },
+    )
+    def save_to_memo_chat_tool(inp: SaveToMemoChatInput) -> str:
+        return save_to_memo_chat(inp)

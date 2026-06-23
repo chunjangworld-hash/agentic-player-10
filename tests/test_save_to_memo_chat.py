@@ -31,3 +31,17 @@ def test_long_content_within_limit():
     result = save_to_memo_chat(inp)
     # max_chars=22000 안전 한계 안
     assert len(result) < 22000
+
+
+def test_warning_category_korean_label():
+    inp = SaveToMemoChatInput(content="사기 의심 카톡 발견", category="warning")
+    result = save_to_memo_chat(inp)
+    assert "[카테고리: 경고]" in result
+
+
+def test_event_category_with_no_label():
+    """label=None branch."""
+    inp = SaveToMemoChatInput(content="추석 D-30 알림", category="event", label=None)
+    result = save_to_memo_chat(inp)
+    assert "[카테고리: 이벤트]" in result
+    assert "[라벨:" not in result  # label part omitted when None

@@ -28,7 +28,9 @@ mcp = FastMCP(
 )
 
 
-# Tool 등록은 Phase 2.2에서 추가됨
+# Tool 등록 (모든 선물고민러 Tool 일괄)
+from servers.gift_curator.tools import register_all
+register_all(mcp)
 
 
 def main() -> None:
