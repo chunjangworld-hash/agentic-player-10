@@ -17,7 +17,8 @@ def test_parent_birthday_returns_three_tones():
     assert "핸드크림" in result
 
 
-def test_specific_tone_only():
+def test_specific_tone_only_excludes_other_tones():
+    """톤 선호 지정 시 다른 두 톤 섹션은 출력에 포함되지 않아야."""
     inp = ComposeGiftMessageInput(
         gift_name="와인",
         recipient_relationship="friend",
@@ -25,8 +26,21 @@ def test_specific_tone_only():
         tone_preference="casual",
     )
     result = compose_gift_message(inp)
-    # 톤 선호 지정 시 그 톤 강조
-    assert "캐주얼" in result or "casual" in result.lower()
+    assert "캐주얼" in result
+    assert "정중 톤" not in result
+    assert "따뜻한 톤" not in result
+
+
+def test_known_relationship_unknown_occasion_uses_fallback():
+    """관계는 매칭되지만 occasion이 없으면 generic fallback 동작."""
+    inp = ComposeGiftMessageInput(
+        gift_name="책",
+        recipient_relationship="parent",
+        occasion="이상한특별일XYZ",
+    )
+    result = compose_gift_message(inp)
+    # fallback 호출되면 occasion 문자열이 결과에 들어감
+    assert "이상한특별일XYZ" in result
 
 
 def test_unknown_combination_falls_back():

@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
@@ -30,12 +31,14 @@ class ComposeGiftMessageInput(BaseModel):
     tone_preference: Literal["formal", "casual", "heartfelt"] | None = None
 
 
+@lru_cache(maxsize=1)
 def _load_templates() -> list[dict]:
     with open(_TEMPLATES_PATH, encoding="utf-8") as fp:
         data = json.load(fp)
     return data.get("templates", [])
 
 
+@lru_cache(maxsize=1)
 def _load_tone_map() -> dict[str, dict]:
     with open(_TONE_MAP_PATH, encoding="utf-8") as fp:
         data = json.load(fp)
@@ -141,6 +144,7 @@ def register(mcp: "FastMCP") -> None:
     """FastMCP Tool 등록."""
 
     @mcp.tool(
+        name="compose_gift_message",
         description=(
             "Gift Curator(선물고민러). Generate message card templates to accompany "
             "a gift, tailored to the relationship, occasion, and chosen gift. "

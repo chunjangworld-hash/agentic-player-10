@@ -58,6 +58,7 @@ def register(mcp) -> None:
     """FastMCP Tool 등록. server.py의 register_all(mcp)에서 호출."""
 
     @mcp.tool(
+        name="save_to_memo_chat",
         description=(
             "Hyodo Secretary(효도비서). Format a Hyodo Secretary result "
             "(greeting message, scam warning, event reminder) into a clean text "
