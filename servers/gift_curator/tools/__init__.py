@@ -7,10 +7,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from servers.gift_curator.tools import compose_gift_message
+
 if TYPE_CHECKING:
     from mcp.server.fastmcp import FastMCP
 
-_TOOL_MODULES: list = []
+_TOOL_MODULES: list = [
+    compose_gift_message,
+]
 
 
 def register_all(mcp: "FastMCP") -> None:
