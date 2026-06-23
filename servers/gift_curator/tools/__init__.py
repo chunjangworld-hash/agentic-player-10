@@ -12,6 +12,7 @@ from servers.gift_curator.tools import (
     curate_gifts,
     evaluate_gift_idea,
     find_real_recommendations,
+    refine_recommendation,
 )
 
 if TYPE_CHECKING:
@@ -22,6 +23,7 @@ _TOOL_MODULES: list = [
     find_real_recommendations,
     evaluate_gift_idea,
     curate_gifts,
+    refine_recommendation,
 ]
 
 
