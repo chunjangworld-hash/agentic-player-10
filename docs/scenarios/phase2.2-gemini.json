@@ -1,0 +1,425 @@
+[
+  {
+    "id": 1,
+    "user_utterance": "아빠한테 오랜만에 연락해보려는데 비 오니까 가볍게 인사할 만한 문장 좀 짜줘.",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "아빠",
+        "recent_event": "비 오는 날씨",
+        "tone": "가볍고 친근함"
+      }
+    },
+    "expected_output_essence": "날씨 상황을 반영한 부담 없는 안부 문구 2-3개 제안 + 이모지 활용 팁",
+    "edge_case_notes": "관계성이 구체적이지 않으므로 가장 보편적이고 무난한 부자/부녀간 톤앤매너 적용"
+  },
+  {
+    "id": 2,
+    "user_utterance": "엄마가 저번에 전화로 나이 드니까 적적하다고 하셨거든. 너무 무겁지 않게 주말에 맛있는 거 챙겨 드시라고 카톡 보내고 싶어.",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "엄마",
+        "recent_event": "적적하다고 하심",
+        "tone": "다정함, 일상적"
+      }
+    },
+    "expected_output_essence": "외로움을 직접 언급하여 자존감을 상하게 하지 않으면서 자연스럽게 주말 먹거리를 챙기는 안부 문구",
+    "edge_case_notes": "부모님의 쓸쓸함을 직접 자극하는 단어는 배제하고 주말 계획을 묻는 형태로 유도"
+  },
+  {
+    "id": 3,
+    "user_utterance": "어머니가 최근에 무릎 관절 수술하셨는데, 경과 물어보면서 무리하지 마시라고 다정하게 보낼 안부 톡 추천해줘.",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "어머니",
+        "recent_event": "무릎 관절 수술",
+        "tone": "다정함, 걱정스러움"
+      }
+    },
+    "expected_output_essence": "수술 후 회복을 기원하되 의학적 조언은 배제하고, 무리한 가사노동을 만류하는 따뜻한 메시지",
+    "edge_case_notes": "의료적인 진단이나 처방성 발언이 포함되지 않도록 일상적인 휴식 권고 수준으로 작성"
+  },
+  {
+    "id": 4,
+    "user_utterance": "벌써 연휴 다 끝나가네... 시댁 챙기느라 친정 아빠한테 연락을 제대로 못 드렸어. 사위랑 같이 안부 묻는 뉘앙스로 자연스럽게 작성해줄 수 있어?",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "친정 아빠",
+        "recent_event": "명절 연휴 마감",
+        "tone": "미안함, 부부 공동 명의"
+      }
+    },
+    "expected_output_essence": "사위의 안부도 함께 담아 서운함을 해소하고, 조만간 찾아뵙겠다는 약속을 포함한 메시지",
+    "edge_case_notes": "자녀의 죄책감이나 미안한 감정이 과도하게 드러나 부모에게 부담을 주지 않도록 조절"
+  },
+  {
+    "id": 5,
+    "user_utterance": "이번 주에 무슨 절기나 기념일 있나? 그거 엮어서 시어머님한테 안부 카톡 하나 보내야겠어.",
+    "relevant_tools": ["find_upcoming_events", "compose_anbu"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "target_week": "current_week"
+      },
+      "compose_anbu": {
+        "relation": "시어머니",
+        "recent_event": "{find_upcoming_events의 결과 절기/기념일}",
+        "tone": "정중함"
+      }
+    },
+    "expected_output_essence": "이번 주에 해당하는 절기(예: 하지, 초복 등) 검색 결과 + 해당 절기 맞춤형 시어머니용 정중한 안부 문구",
+    "edge_case_notes": "절기 검색 결과가 없을 경우, 최근 날씨 변화나 계절적 특징을 대안으로 삼아 안부 생성"
+  },
+  {
+    "id": 6,
+    "user_utterance": "엄마가 카톡으로 이상한 링크를 보냈어. '엄마 나 폰 고장 나서 액정 수리비 급해'라는데 이거 내 말투도 아니고 사기 맞지? 확인 좀 해줘.",
+    "relevant_tools": ["check_suspicious_message"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "엄마 나 폰 고장 나서 액정 수리비 급해",
+        "sender": "자녀 사칭 의심"
+      }
+    },
+    "expected_output_essence": "전형적인 가족 사칭 메신저 피싱 패턴 분석 + 부모님께 즉시 전화를 걸어 확인할 것을 안내하는 행동 가이드",
+    "edge_case_notes": "사기 가능성이 매우 높음을 알리되 '100% 사기'라는 확정 표현 대신 신속한 유선 확인 프로세스 제공"
+  },
+  {
+    "id": 7,
+    "user_utterance": "[이미지: 해외 결제 980,000원 완료, 본인 아닐 시 소비자원 신고 02-xxx-xxxx] 아버지가 이런 문자를 받으셨다고 캡처해 보내셨는데 이거 스미싱인지 봐줘.",
+    "relevant_tools": ["check_suspicious_message"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "해외 결제 980,000원 완료, 본인 아닐 시 소비자원 신고 02-xxx-xxxx",
+        "sender": "미상의 기관"
+      }
+    },
+    "expected_output_essence": "해외 결제 및 소비자원 사칭 스미싱 기법 확인 + 해당 번호로 전화 금지 및 링크 클릭 금지 경고",
+    "edge_case_notes": "사용자가 텍스트를 이미지 형태로 설명했으므로 핵심 정보를 추출하여 피싱 위험도 판정"
+  },
+  {
+    "id": 8,
+    "user_utterance": "할머니가 우체국에서 반송 물품이 있다고 주소 입력하라는 문자를 받으셨대. 링크 누르기 직전이셨다는데 이거 스팸인지 분석해줄래?",
+    "relevant_tools": ["check_suspicious_message"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "우체국 반송 물품 주소 입력 요구 및 링크 포함",
+        "sender": "우체국 사칭 의심"
+      }
+    },
+    "expected_output_essence": "공공기관 및 택배사 사칭 주소지 변경 스미싱 사례 매칭 + 피해 예방을 위한 행동 요령",
+    "edge_case_notes": "고령층인 할머니가 타깃이 되었으므로, 자녀가 대신 차단하거나 보안 앱을 점검할 수 있도록 안내 고도화"
+  },
+  {
+    "id": 9,
+    "user_utterance": "아빠 휴대폰에 시중은행 정책 자금 저금리 대출 특별 대상자라고 문자가 왔다는데 이거 진짜야 사기야?",
+    "relevant_tools": ["check_suspicious_message"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "시중은행 정책 자금 저금리 대출 특별 대상자",
+        "sender": "은행 사칭 의심"
+      }
+    },
+    "expected_output_essence": "정부 지원 자금 사칭 불법 대출 광고 및 피싱 유도 문자 특성 분석 + 제도권 금융회사 확인 방법 제시",
+    "edge_case_notes": "실제 은행 광고일 가능성도 미연에 고려하여 공식 대표번호 외의 링크나 번호는 위험할 수 있음을 균형 있게 전달"
+  },
+  {
+    "id": 10,
+    "user_utterance": "요즘 날씨가 갑자기 너무 더워져서 대구 사시는 부모님 온열질환 걱정되네. 낮에 밭일 나가지 마시라고 주의 문구 좀 정중하게 써줘.",
+    "relevant_tools": ["compose_parent_warning"],
+    "tool_inputs": {
+      "compose_parent_warning": {
+        "warning_type": "폭염/온열질환",
+        "parent_location": "대구",
+        "parent_activity": "밭일"
+      }
+    },
+    "expected_output_essence": "부모님의 일과(밭일)를 존중하면서도, 폭염 시간대 휴식을 정중하게 권고하는 폭염 주의 메시지",
+    "edge_case_notes": "지시조나 과도한 통제성 표현을 지양하고 부모님의 건강 상태를 염려하는 어조 유지"
+  },
+  {
+    "id": 11,
+    "user_utterance": "최근에 노인들 대상으로 건강식품 강매하는 사기가 유행이라며? 시부모님 피해 안 보시게 조심하라고 당부하는 톡 보낼 건데 글 좀 다듬어줘.",
+    "relevant_tools": ["compose_parent_warning"],
+    "tool_inputs": {
+      "compose_parent_warning": {
+        "warning_type": "떳다방/건강식품 사기",
+        "relation": "시부모님"
+      }
+    },
+    "expected_output_essence": "최근 유행하는 무료 사은품 포섭형 강매 사기 수법을 부모님이 이해하기 쉽게 풀어쓴 주의 문구",
+    "edge_case_notes": "부모님을 유혹에 취약한 대상으로 묘사하지 않고, 최근 지능화된 사기 수법이 많으니 조심하자는 동등한 눈높이 설정"
+  },
+  {
+    "id": 12,
+    "user_utterance": "올해 초복이 언제더라? 시댁 부모님 삼계탕이라도 한 그릇 대접해 드려야 할 것 같은데 날짜랑 제철 음식 정보 좀 알려줘.",
+    "relevant_tools": ["find_upcoming_events"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "keyword": "초복",
+        "include_seasonal_food": true
+      }
+    },
+    "expected_output_essence": "해당 연도의 정확한 초복 날짜 + 보양식 및 여름철 제철 음식 추천 정보",
+    "edge_case_notes": "단순 날짜 제공에 그치지 않고 어르신들이 선호할 만한 대체 보양 음식(장어, 민어 등) 정보를 함께 구성"
+  },
+  {
+    "id": 13,
+    "user_utterance": "다음 달에 혹은 부모님 세대가 챙기는 절기나 국가 기념일 같은 거 빠진 거 있나 체크해줘. 미리 일정 잡아두게.",
+    "relevant_tools": ["find_upcoming_events"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "target_month": "next_month",
+        "filter": "traditional_and_national"
+      }
+    },
+    "expected_output_essence": "다음 달 기준 주요 절기(예: 처서, 백로 등) 및 기념일(노인의 날 등) 리스트와 대화 소재 추천",
+    "edge_case_notes": "젊은 층은 무심코 지나치기 쉬우나 부모님 세대에게는 의미 있는 음력 기준 행사나 절기를 꼼꼼히 반영"
+  },
+  {
+    "id": 14,
+    "user_utterance": "엄마가 카톡으로 '우리 집 도어락 비밀번호 2580*이고, 보일러 에러 뜨면 031 연락해라'라고 주저리주저리 보내셨는데 나중에 찾기 쉽게 메모장에 저장해줘.",
+    "relevant_tools": ["save_to_memo_chat"],
+    "tool_inputs": {
+      "save_to_memo_chat": {
+        "category": "부모님 댁 정보",
+        "content": "도어락 비밀번호: 2580*, 보일러 에러 시 연락처: 031"
+      }
+    },
+    "expected_output_essence": "해당 텍스트에서 핵심 가독 정보를 추출하여 카카오톡 '나와의 채팅방'에 정돈된 형태로 전송 완료 메시지",
+    "edge_case_notes": "비밀번호 등 민감 정보가 포함되어 있으므로 저장 시 보안 주의 문구 및 정돈된 포맷팅 적용"
+  },
+  {
+    "id": 15,
+    "user_utterance": "아버지가 복용 중이신 혈압약 이름이 '아모디핀정'이랑 당뇨약 이름 찍어서 보내주셨어. 이거 나중에 병원 갈 때 보게 내 카톡 메모방에 박아놔 줘.",
+    "relevant_tools": ["save_to_memo_chat"],
+    "tool_inputs": {
+      "save_to_memo_chat": {
+        "category": "부모님 건강/의약품",
+        "content": "아버님 복용 약물: 혈압약(아모디핀정), 당뇨약 정보"
+      }
+    },
+    "expected_output_essence": "약물 이름을 명확히 기록하여 나챗방에 저장하고, 추후 병원 방문 시 바로 보여줄 수 있는 형태의 텍스트 생성",
+    "edge_case_notes": "의약품 이름의 오탈자를 방지하고, 약물에 대한 임의의 효능 해석이나 의료 진단 성격의 멘트는 철저히 차단"
+  },
+  {
+    "id": 16,
+    "user_utterance": "이번 어버이날에 시부모님 선물로 20만 원 선에서 건강보조식품 말고 다른 거 해드리고 싶은데 3개만 뽑아줘. 바이럴 말고 진짜 후기 좋은 걸로.",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "시부모님",
+        "occasion": "어버이날",
+        "budget_max": 200000,
+        "previous_gifts": "건강보조식품 제외"
+      }
+    },
+    "expected_output_essence": "20만 원 이하 가전/리빙/패션 카테고리 내 실제 만족 후기 기반의 선물 추천 3종 + 다중 플랫폼 검증 포인트 및 카카오 선물하기 키워드",
+    "edge_case_notes": "건강보조식품을 명시적으로 제외했으므로 실용적이면서도 고급스러움을 주는 마사지기나 침구류 등으로 다변화"
+  },
+  {
+    "id": 17,
+    "user_utterance": "장인어른이 은퇴하시고 집에만 계시니까 무기력해 보이셔. 취미 생활 붙이실 만한 선물을 사고 싶은데 뭐가 좋을까? 돈은 크게 상관없어.",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "장인어른",
+        "occasion": "은퇴 후 일상 무기력",
+        "budget_max": null,
+        "parent_situation": "취미 시작용"
+      }
+    },
+    "expected_output_essence": "은퇴 후 자존감을 유지하며 몰입할 수 있는 취미(예: 프리미엄 가드닝, 고급 자전거/등산 장비, 디지털 드로잉 등) 추천 3선",
+    "edge_case_notes": "예산 한도가 없으므로 저가형 상품은 제외하고 부모님의 품격을 높여줄 수 있는 완성도 높은 제품군으로 구성"
+  },
+  {
+    "id": 18,
+    "user_utterance": "시어머니 60대 중반이신데 갱년기 때문에 불면증이 좀 있으시대. 10만 원 안팎으로 숙면에 도움 될 만한 아이템 3개랑 편지 문구도 같이 짜줘.",
+    "relevant_tools": ["curate_gifts", "compose_gift_message"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "시어머니",
+        "occasion": "갱년기/불면증 완화 도움",
+        "budget_max": 100000
+      },
+      "compose_gift_message": {
+        "relation": "시어머니",
+        "gift_item": "{curate_gifts의 선택 아이템}"
+      }
+    },
+    "expected_output_essence": "숙면 유도용 리빙 아이템(경추 베개, 프리미엄 아로마 디퓨저 등) 3선 추천 + 건강 기원 및 부담 없는 다정한 한 줄 메시지 카피",
+    "edge_case_notes": "갱년기를 치료한다는 식의 의학적 과장 표현을 금지하고, 쾌적한 휴식을 기원하는 메시지로 정제"
+  },
+  {
+    "id": 19,
+    "user_utterance": "친정엄마 칠순이신데 너무 노인 취급하는 선물 말고, 아직 정정하시고 멋쟁이시라는 걸 부각할 수 있는 명품이나 패션 아이템 50만 원대로 추천해줘.",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "친정엄마",
+        "occasion": "칠순(고희)",
+        "budget_max": 500000,
+        "parent_situation": "패션/명품 선호, 젊은 성향"
+      }
+    },
+    "expected_output_essence": "노인성 상품군을 배제한 고품격 브랜드 스카프, 주얼리, 미니 백 등 패션 아이템 3선 + 각 아이템의 트렌디함 검증 근거",
+    "edge_case_notes": "시혜적이거나 나이를 과도하게 의식한 선물군은 배제하고 중장년층 여성의 자존감을 높여줄 세련된 아이템으로 압축"
+  },
+  {
+    "id": 20,
+    "user_utterance": "아빠 생신인데 가볍게 모바일 쿠폰으로 쏠 만한 3~5만 원대 실용적인 선물 있을까? 부담스럽지 않은 걸로.",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "아빠",
+        "occasion": "생신",
+        "budget_max": 500000,
+        "budget_min": 30000,
+        "parent_situation": "모바일 쿠폰 교환 가능형"
+      }
+    },
+    "expected_output_essence": "교환이 편리한 주유권, 대형마트 모바일 금액권, 프랜차이즈 치킨/베이커리 세트 등 3~5만 원대 실용 상품 추천",
+    "edge_case_notes": "부모님이 모바일 바코드를 사용하기에 복잡하지 않은 대중적이고 매장 접근성이 좋은 브랜드 위주로 매칭"
+  },
+  {
+    "id": 21,
+    "user_utterance": "시댁 갈 때 빈손으로 가기 뭐해서 5만 원대 과일 바구니 생각 중인데, 요즘 과일값 비싸서 괜찮을지 평가해보고 다른 대안도 좀 줘 봐.",
+    "relevant_tools": ["evaluate_gift_idea", "curate_gifts"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "gift_idea": "5만 원대 과일 바구니",
+        "target_audience": "시댁 부모님"
+      },
+      "curate_gifts": {
+        "relation": "시댁 부모님",
+        "occasion": "방문용 가벼운 선물",
+        "budget_max": 60000
+      }
+    },
+    "expected_output_essence": "5만 원대 과일 바구니의 최근 가성비/품질 만족도 평가 + 동 가격대 대체 가능한 센스 있는 식품/디저트 세트(예: 프리미엄 한과, 수제 청 등) 추천",
+    "edge_case_notes": "최근 물가 동향을 감안하여 과일 바구니의 풍성함이 떨어질 수 있다는 점을 합리적으로 지적하고 대안 제시"
+  },
+  {
+    "id": 22,
+    "user_utterance": "시아버지 환갑 선물로 안마의자 렌탈해 드리려고 하는데, 자리 차지하고 나중엔 빨래걸이 된다는 말이 있어서 고민이야. 실제 60대 만족도가 어떤지 장단점 분석해줘.",
+    "relevant_tools": ["evaluate_gift_idea"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "gift_idea": "안마의자 렌탈",
+        "target_audience": "60대 시아버지(환갑)"
+      }
+    },
+    "expected_output_essence": "실제 중장년층 가정 내 안마의자 보유자들의 긍정/부정 후기 요약(공간 차지 문제, 실제 사용 빈도 등) 및 렌탈 시 계약 주의점 환기",
+    "edge_case_notes": "무조건적인 비추천이나 추천 대신 실제 주거 공간 크기 및 아버님 체형 매칭 여부가 중요하다는 현실적 장단점 밸런스 유지"
+  },
+  {
+    "id": 23,
+    "user_utterance": "엄마가 요즘 손목 관절이 안 좋으시대서 파라핀 베스를 사드릴까 하는데, 노인들이 혼자 쓰기에 화상 위험이나 번거로움이 없을지 평가해줄래?",
+    "relevant_tools": ["evaluate_gift_idea"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "gift_idea": "파라핀 베스",
+        "target_audience": "손목 관절이 불편한 노년층 어머니"
+      }
+    },
+    "expected_output_essence": "가정용 파라핀 베스의 실사용 후기 분석(왁스 녹이는 시간, 뒤처리 번거로움, 고령층 사용 편의성) 및 대안 제품군 언급",
+    "edge_case_notes": "피부 화상이나 조작 미숙 리스크를 짚어주되 질환 자체에 대한 치료 효과가 확실하다는 식의 임상적 확언 금지"
+  },
+  {
+    "id": 24,
+    "user_utterance": "친정아빠 생신에 로봇청소기 최신형으로 사드리면 잘 쓰실까? 기계 조작 어려워하실까 봐 걱정되네.",
+    "relevant_tools": ["evaluate_gift_idea"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "gift_idea": "최신형 로봇청소기",
+        "target_audience": "노년층 친정아빠"
+      }
+    },
+    "expected_output_essence": "7080세대 부모님의 로봇청소기 사용 장벽(어플 연동, 먼지통 비움 등)과 이를 상쇄할 자동 스테이션 탑재형 모델의 적합도 분석",
+    "edge_case_notes": "스마트폰 제어 필수 모델보다는 원터치 물리 버튼이나 리모컨 제어가 가능한 모델이 유리하다는 구체적 팁 포함"
+  },
+  {
+    "id": 25,
+    "user_utterance": "아까 추천해 준 3개 중에 홍삼은 저번에 해드렸고, 화장품은 피부에 안 맞으시대. 먹는 거 말고 인테리어나 가전 쪽으로 다시 뽑아줘.",
+    "relevant_tools": ["refine_recommendation"],
+    "tool_inputs": {
+      "refine_recommendation": {
+        "rejected_items": ["홍삼", "화장품"],
+        "preferred_categories": ["인테리어", "가전"],
+        "previous_context_id": null
+      }
+    },
+    "expected_output_essence": "소비성 식품/뷰티 제품을 제외하고 소형 가전(예: 침구 살균기, 명품 무드등, 족욕기 등) 위주의 재추천 리스트 3종",
+    "edge_case_notes": "유저 피싱/필터링 피드백을 즉각 수용하여 2차 추천의 카테고리를 완벽히 분리"
+  },
+  {
+    "id": 26,
+    "user_utterance": "아까 10만 원대로 물어봤는데 예산이 좀 늘어서 30만 원까지 가능할 것 같아. 아까 말한 소형 안마기 말고 조금 더 고급스러운 라인으로 재추천해 줘.",
+    "relevant_tools": ["refine_recommendation"],
+    "tool_inputs": {
+      "refine_recommendation": {
+        "new_budget_max": 300000,
+        "rejected_items": ["소형 안마기"],
+        "tone_upgrade": "고급스러움 상향"
+      }
+    },
+    "expected_output_essence": "30만 원 선에 최적화된 브랜드 가전 및 웰빙 명품 라인업 추천 + 패키징이 고급스러운 제품 위주 선정 이유",
+    "edge_case_notes": "단순 가성비 제품군에서 프리미엄 라인업으로 눈높이를 높여 백화점 입점 브랜드 위주로 매칭"
+  },
+  {
+    "id": 27,
+    "user_utterance": "장모님 생신 선물로 스카프 샀는데 카카오톡 선물하기 메시지 카드에 넣을 센스 있고 짧은 한 줄 문구 좀 적어줘.",
+    "relevant_tools": ["compose_gift_message"],
+    "tool_inputs": {
+      "compose_gift_message": {
+        "relation": "장모님",
+        "gift_item": "스카프",
+        "length": "한 줄(단문)"
+      }
+    },
+    "expected_output_essence": "장모님의 고운 외모를 칭찬하면서 선물의 실용성을 엮은 위트 있고 정중한 사위표 메시지 2-3선",
+    "edge_case_notes": "너무 고전적이거나 진부한 표현(예: '항상 건강하시고...')을 탈피하여 산뜻한 뉘앙스로 작성"
+  },
+  {
+    "id": 28,
+    "user_utterance": "아빠한테 현금 케이크 해드리기로 했는데, 너무 오글거리지 않으면서 자식 키우느라 고생하셨다는 마음 전할 만한 문장 2개만 줘 봐.",
+    "relevant_tools": ["compose_gift_message"],
+    "tool_inputs": {
+      "compose_gift_message": {
+        "relation": "아빠",
+        "gift_item": "현금 케이크",
+        "length": "중문(2-3문장)"
+      }
+    },
+    "expected_output_essence": "현금이라는 유쾌한 요소와 아버님의 노고에 대한 담백한 감사를 결합하여, 감동과 웃음을 동시에 주는 멘트",
+    "edge_case_notes": "신파조의 무거운 눈물 유도용 멘트는 피하고 부자/부녀간에 쑥스럽지 않게 건넬 수 있는 수위 조절"
+  },
+  {
+    "id": 29,
+    "user_utterance": "엄마 발이 자꾸 부으셔서 편한 효도 신발 찾고 있는데, 블로그 보면 다 협찬 광고뿐이더라. 카페나 커뮤니티에서 광고 없이 진짜 내돈내산으로 부모님 만족도 높은 브랜드 검증해줘.",
+    "relevant_tools": ["find_real_recommendations"],
+    "tool_inputs": {
+      "find_real_recommendations": {
+        "category": "부모님 효도 신발/편한 워킹화",
+        "target_condition": "발 부종/발볼 넓음"
+      }
+    },
+    "expected_output_essence": "대가성 리뷰가 제외된 주요 중장년층 커뮤니티 추천 누적 브랜드(예: 특정 컴포트화 라인) 및 실사용자들의 발볼/쿠션감 만족 기준 데이터",
+    "edge_case_notes": "'이 신발을 신으면 부종이 낫는다'와 같은 치료적 효과는 일절 배제하고 pure하게 착화감과 편안함 관점만 서술"
+  },
+  {
+    "id": 30,
+    "user_utterance": "60대 후반 아버지가 드실 오메가3 고르는데 유튜브고 블로그고 죄다 광고 같아서 못 믿겠어. 실제 소비자들이 성분이나 목 넘김 때문에 추천하는 진짜 제품 정보만 발라내 줘.",
+    "relevant_tools": ["find_real_recommendations"],
+    "tool_inputs": {
+      "find_real_recommendations": {
+        "category": "오메가3",
+        "target_audience": "60대 후반 남성",
+        "user_concern": "알약 크기/목 넘김/비린내"
+      }
+    },
+    "expected_output_essence": "커뮤니티 및 성분 분석 플랫폼에서 인지도가 높은 상위 2-3개 오메가3 제품의 실사용자 평판(특히 목 넘김, 소화력 위주) 정리",
+    "edge_case_notes": "건강기능식품 선택 시의 소비자 불만 요소를 중점 스크리닝하되, 질병 예방 효능에 대한 확정적 가이드라인은 주지 않음"
+  }
+]

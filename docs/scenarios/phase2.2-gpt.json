@@ -1,0 +1,544 @@
+[
+  {
+    "id": 1,
+    "user_utterance": "엄마한테 오늘 그냥 안부 카톡 하나 보내고 싶은데 너무 딱딱하지 않게 써줘",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "엄마",
+        "recent_event": null,
+        "tone": "자연스럽고 다정하지만 부담스럽지 않게",
+        "health_context": null,
+        "message_length": "짧음"
+      }
+    },
+    "expected_output_essence": "일상 안부 메시지 2~3개 버전 + 과한 표현 없이 자연스러운 카카오톡 문장",
+    "edge_case_notes": "최근 이벤트가 없으므로 날씨·식사·하루 컨디션 정도로 가볍게 구성"
+  },
+  {
+    "id": 2,
+    "user_utterance": "아빠가 요즘 무릎 아프다고 하시는데 부담 안 주는 말투로 안부 보내고 싶어",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "아빠",
+        "recent_event": "무릎 불편 언급",
+        "tone": "걱정은 담되 간섭처럼 들리지 않게",
+        "health_context": "관절 불편",
+        "message_length": "중간"
+      }
+    },
+    "expected_output_essence": "건강 상태를 단정하지 않고 오늘 컨디션을 묻는 안부 문장 + 답장 부담을 낮추는 마무리",
+    "edge_case_notes": "의료 판단이나 처방성 표현 없이 생활 안부 중심으로 작성"
+  },
+  {
+    "id": 3,
+    "user_utterance": "엄마가 어제 친구분들이랑 여행 다녀왔다는데 그 얘기 이어갈 카톡 문장 좀",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "엄마",
+        "recent_event": "친구들과 여행",
+        "tone": "관심 있게 대화 이어가기",
+        "health_context": null,
+        "message_length": "중간"
+      }
+    },
+    "expected_output_essence": "여행 경험을 묻고 사진·음식·동행 이야기를 자연스럽게 이어가는 카카오톡 문장",
+    "edge_case_notes": "부모의 활동성을 긍정하되 과장된 칭찬이나 시혜적 표현은 배제"
+  },
+  {
+    "id": 4,
+    "user_utterance": "이번 주에 부모님께 챙겨드릴 만한 날 있나 보고, 있으면 그거랑 엮어서 안부톡 써줘",
+    "relevant_tools": ["find_upcoming_events", "compose_anbu"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "period": "이번 주",
+        "target_relation": "부모님",
+        "event_types": ["절기", "기념일", "시즌 건강", "생활 이슈"],
+        "region": "한국"
+      },
+      "compose_anbu": {
+        "relation": "부모님",
+        "recent_event": "이번 주 시즌 이벤트 결과 반영",
+        "tone": "자연스럽고 실용적으로",
+        "health_context": null,
+        "message_length": "중간"
+      }
+    },
+    "expected_output_essence": "이번 주 챙기기 좋은 이벤트 1~2개 + 그 이벤트를 자연스럽게 녹인 안부 메시지",
+    "edge_case_notes": "이벤트가 없으면 날씨·식사·외출 안전 중심으로 대체"
+  },
+  {
+    "id": 5,
+    "user_utterance": "엄마가 요즘 혼자 밥 먹는 날 많다는데 괜히 무겁지 않게 말 걸고 싶어",
+    "relevant_tools": ["compose_anbu"],
+    "tool_inputs": {
+      "compose_anbu": {
+        "relation": "엄마",
+        "recent_event": "혼자 식사하는 날이 많음",
+        "tone": "따뜻하지만 가볍게",
+        "health_context": null,
+        "message_length": "짧음"
+      }
+    },
+    "expected_output_essence": "식사 안부와 일상 공유를 유도하는 짧은 메시지 + 부담 없는 답장 유도",
+    "edge_case_notes": "외로움을 직접 단정하지 않고 대화의 여지를 만드는 표현 사용"
+  },
+  {
+    "id": 6,
+    "user_utterance": "엄마가 문자 왔다고 보내줬는데 '교통범칙금 미납 확인 http://bit.ly/xxx' 이거 위험한 거야?",
+    "relevant_tools": ["check_suspicious_message", "compose_parent_warning"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "교통범칙금 미납 확인 http://bit.ly/xxx",
+        "channel": "SMS",
+        "sender": "알 수 없음",
+        "has_url": true,
+        "user_observation": "단축 URL 포함"
+      },
+      "compose_parent_warning": {
+        "recipient_relation": "엄마",
+        "risk_topic": "범칙금 사칭 스미싱",
+        "tone": "놀라게 하지 않고 바로 행동 지침 중심",
+        "include_action_steps": true
+      }
+    },
+    "expected_output_essence": "의심 근거 요약 + 링크 클릭 금지 안내 + 엄마에게 보낼 짧은 경고 메시지",
+    "edge_case_notes": "확정 표현 대신 '의심 가능성이 높음'으로 판단하고 공식 앱 직접 확인을 안내"
+  },
+  {
+    "id": 7,
+    "user_utterance": "아빠 카톡에 누가 '아들인데 폰 고장났어, 이 계좌로 먼저 보내줘'라고 왔다는데 검사해줘",
+    "relevant_tools": ["check_suspicious_message", "compose_parent_warning"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "아들인데 폰 고장났어. 지금 통화 안 돼. 이 계좌로 먼저 보내줘.",
+        "channel": "카카오톡",
+        "sender": "가족 사칭 의심 계정",
+        "has_url": false,
+        "user_observation": "송금 요구와 통화 회피"
+      },
+      "compose_parent_warning": {
+        "recipient_relation": "아빠",
+        "risk_topic": "지인 사칭 메신저피싱",
+        "tone": "단호하지만 불안감을 키우지 않게",
+        "include_action_steps": true
+      }
+    },
+    "expected_output_essence": "메신저피싱 가능성이 높은 이유 + 기존 번호로 직접 통화 확인하라는 안내 + 부모님께 전달할 문장",
+    "edge_case_notes": "부모님을 탓하는 표현 없이 '요즘 이런 방식이 많다'는 식으로 설명"
+  },
+  {
+    "id": 8,
+    "user_utterance": "엄마가 받은 문자에 '민생지원금 대상자 확인'이라고 링크가 있대. 이거 봐줘",
+    "relevant_tools": ["check_suspicious_message"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "민생지원금 대상자 확인. 신청 기한 오늘까지. 링크 접속 후 본인확인",
+        "channel": "SMS",
+        "sender": "정부기관 사칭 의심",
+        "has_url": true,
+        "user_observation": "기한 압박과 본인확인 요구"
+      }
+    },
+    "expected_output_essence": "지원금 사칭 스미싱 의심 신호 3개 + 링크 클릭·개인정보 입력 금지 + 공식 경로 직접 확인 안내",
+    "edge_case_notes": "정책 존재 여부와 별개로 문자 링크는 별도 위험 신호로 판단"
+  },
+  {
+    "id": 9,
+    "user_utterance": "아빠가 '해외결제 873,000원 승인' 문자 받고 놀라서 거기 적힌 고객센터로 전화하려고 해",
+    "relevant_tools": ["check_suspicious_message", "compose_parent_warning"],
+    "tool_inputs": {
+      "check_suspicious_message": {
+        "message_text": "해외결제 873,000원 승인. 본인 사용 아닐 경우 고객센터로 즉시 문의",
+        "channel": "SMS",
+        "sender": "카드사 사칭 의심",
+        "has_url": false,
+        "user_observation": "문자 내 전화번호로 통화 유도"
+      },
+      "compose_parent_warning": {
+        "recipient_relation": "아빠",
+        "risk_topic": "카드사 사칭 결제 문자",
+        "tone": "짧고 즉시 이해되게",
+        "include_action_steps": true
+      }
+    },
+    "expected_output_essence": "문자 속 번호로 전화하지 말라는 핵심 안내 + 카드사 공식 앱이나 카드 뒷면 번호 확인 문장",
+    "edge_case_notes": "실제 결제 여부 확인은 공식 채널로 분리하도록 안내"
+  },
+  {
+    "id": 10,
+    "user_utterance": "부모님한테 추석 전에 택배 문자 조심하라고 보내고 싶은데 너무 겁주는 느낌 말고",
+    "relevant_tools": ["compose_parent_warning"],
+    "tool_inputs": {
+      "compose_parent_warning": {
+        "recipient_relation": "부모님",
+        "risk_topic": "명절 택배 사칭 스미싱",
+        "tone": "차분하고 실용적으로",
+        "season": "추석 전",
+        "include_action_steps": true
+      }
+    },
+    "expected_output_essence": "택배 주소 오류·배송조회 링크 주의 메시지 + 공식 앱 직접 확인 안내 + 짧은 카카오톡 버전",
+    "edge_case_notes": "공포 유발 표현을 줄이고 '헷갈릴 수 있으니 같이 확인하자'는 방향"
+  },
+  {
+    "id": 11,
+    "user_utterance": "요즘 날 더워서 아빠한테 외출할 때 조심하라고 말하고 싶은데 잔소리처럼 안 보이게",
+    "relevant_tools": ["compose_parent_warning"],
+    "tool_inputs": {
+      "compose_parent_warning": {
+        "recipient_relation": "아빠",
+        "risk_topic": "무더위 외출 주의",
+        "tone": "존중하는 말투",
+        "season": "여름",
+        "include_action_steps": true
+      }
+    },
+    "expected_output_essence": "물·모자·그늘·무리한 외출 피하기를 자연스럽게 담은 짧은 안내 메시지",
+    "edge_case_notes": "건강 상태를 단정하지 않고 생활 주의 수준으로만 작성"
+  },
+  {
+    "id": 12,
+    "user_utterance": "이번 주 절기나 기념일 중에 엄마한테 말 걸 만한 소재 있어?",
+    "relevant_tools": ["find_upcoming_events"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "period": "이번 주",
+        "target_relation": "엄마",
+        "event_types": ["절기", "기념일", "계절 음식", "날씨 이슈"],
+        "region": "한국"
+      }
+    },
+    "expected_output_essence": "이번 주 대화 소재 2~3개 + 각 소재별 카톡 첫 문장 예시",
+    "edge_case_notes": "특별한 기념일이 없으면 계절·날씨·식사 소재로 대체"
+  },
+  {
+    "id": 13,
+    "user_utterance": "어버이날 말고 5월에 부모님이랑 얘기 꺼낼 만한 날이나 시즌 이슈 찾아줘",
+    "relevant_tools": ["find_upcoming_events"],
+    "tool_inputs": {
+      "find_upcoming_events": {
+        "period": "5월",
+        "target_relation": "부모님",
+        "event_types": ["기념일", "건강 시즌", "가족 일정", "생활 정보"],
+        "region": "한국"
+      }
+    },
+    "expected_output_essence": "5월 대화·챙김 소재 목록 + 안부·식사·외출 제안으로 연결할 수 있는 포인트",
+    "edge_case_notes": "어버이날만 반복하지 않고 계절 변화와 가족 일정 중심으로 다양화"
+  },
+  {
+    "id": 14,
+    "user_utterance": "아빠가 '혈압약이 이번 달부터 흰색 작은 걸로 바뀌었다'고 했는데 나와의 채팅방에 저장해줘",
+    "relevant_tools": ["save_to_memo_chat"],
+    "tool_inputs": {
+      "save_to_memo_chat": {
+        "memo_text": "아빠 혈압약: 이번 달부터 흰색 작은 약으로 변경",
+        "source_context": "아빠가 카카오톡으로 직접 말함",
+        "category": "건강 관련 메모",
+        "reminder_date": null
+      }
+    },
+    "expected_output_essence": "나와의 채팅방에 저장할 짧고 찾기 쉬운 메모 문장 + 태그 제안",
+    "edge_case_notes": "의약품 판단이나 복용 조언 없이 사용자가 들은 정보를 정리해 저장"
+  },
+  {
+    "id": 15,
+    "user_utterance": "엄마가 다음 주 수요일에 동창회 간다는데 까먹지 않게 메모해줘",
+    "relevant_tools": ["save_to_memo_chat"],
+    "tool_inputs": {
+      "save_to_memo_chat": {
+        "memo_text": "엄마 다음 주 수요일 동창회 일정",
+        "source_context": "엄마가 카카오톡으로 알려줌",
+        "category": "부모님 일정",
+        "reminder_date": "다음 주 수요일"
+      }
+    },
+    "expected_output_essence": "일정명·대상·날짜가 포함된 나챗방 저장용 메모 + 당일 안부 연결 문장 제안",
+    "edge_case_notes": "정확한 날짜가 상대 표현이면 현재 날짜 기준 변환이 필요"
+  },
+  {
+    "id": 16,
+    "user_utterance": "엄마 다음 주 생신인데 뭐 사드려야 할지 모르겠어. 10만원 안쪽이면 좋고 너무 건강식품 느낌은 별로",
+    "relevant_tools": ["curate_gifts", "compose_gift_message"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "엄마",
+        "occasion": "생신",
+        "budget_max": 100000,
+        "previous_gifts": null,
+        "parent_situation": "건강식품 느낌은 선호하지 않음",
+        "exclude_categories": ["건강식품"],
+        "review_filter": "광고성 후기 제외, 실제 만족 신호 가산"
+      },
+      "compose_gift_message": {
+        "relation": "엄마",
+        "occasion": "생신",
+        "gift_item": "curate_gifts 결과 중 선택 전",
+        "tone": "담백하고 따뜻하게"
+      }
+    },
+    "expected_output_essence": "10만원 이하 선물 후보 3개 + 추천 이유 + 피해야 할 카테고리 반영 + 카드 메시지 초안",
+    "edge_case_notes": "선물 확정 전 카드 메시지는 범용 문장으로 생성"
+  },
+  {
+    "id": 17,
+    "user_utterance": "아빠 은퇴하고 집에 있는 시간이 많아졌는데 생일 선물 뭐가 좋을까? 예산은 20만원 정도",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "아빠",
+        "occasion": "생일",
+        "budget_max": 200000,
+        "previous_gifts": null,
+        "parent_situation": "은퇴 후 집에 있는 시간이 많음",
+        "exclude_categories": [],
+        "review_filter": "광고 제거, 장기 사용 후기 가산"
+      }
+    },
+    "expected_output_essence": "집에서 실제로 쓰기 좋은 선물 후보 3개 + 가격대 + 후기 신뢰 포인트 + 검색 키워드",
+    "edge_case_notes": "취미 정보가 없으므로 실내용·생활밀착형·취향 덜 타는 후보로 다양화"
+  },
+  {
+    "id": 18,
+    "user_utterance": "장모님께 첫 명절 선물인데 너무 과하지 않으면서 성의 있어 보이는 거 추천해줘",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "장모님",
+        "occasion": "첫 명절 인사",
+        "budget_max": null,
+        "previous_gifts": null,
+        "parent_situation": "관계 초반, 과한 선물은 부담",
+        "exclude_categories": [],
+        "review_filter": "광고성 추천 제외, 실구매 만족 후기 중심"
+      }
+    },
+    "expected_output_essence": "부담 적고 격식 있는 선물 3개 + 가격대별 선택지 + 피해야 할 과한 표현",
+    "edge_case_notes": "예산 미입력 시 5만원대·10만원대·15만원대 후보를 나눔"
+  },
+  {
+    "id": 19,
+    "user_utterance": "엄마가 손목이 좀 불편하다고 하셔서 생활에 도움 되는 선물 보고 싶어. 의료기기 말고",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "엄마",
+        "occasion": "평소 선물",
+        "budget_max": null,
+        "previous_gifts": null,
+        "parent_situation": "손목이 불편하다고 언급",
+        "exclude_categories": ["의료기기", "치료 목적 제품"],
+        "review_filter": "실사용 후기와 장기사용 신호 중심"
+      }
+    },
+    "expected_output_essence": "손목 부담을 줄일 수 있는 생활용품 후보 3개 + 치료 효능 단정 없는 추천 이유",
+    "edge_case_notes": "건강 문제 해결처럼 표현하지 않고 생활 편의 중심으로 제안"
+  },
+  {
+    "id": 20,
+    "user_utterance": "맘카페에서 부모님 선물로 진짜 반응 좋았던 거 위주로 찾아서 추천해줘. 광고 말고",
+    "relevant_tools": ["find_real_recommendations", "curate_gifts"],
+    "tool_inputs": {
+      "find_real_recommendations": {
+        "category": "부모님 선물",
+        "channels": ["블로그", "맘카페", "SNS"],
+        "exclude_ad_signals": true,
+        "positive_signals": ["재구매", "가족 반응", "실사용 기간", "단점 언급"]
+      },
+      "curate_gifts": {
+        "relation": "부모님",
+        "occasion": "일반 선물",
+        "budget_max": null,
+        "previous_gifts": null,
+        "parent_situation": null,
+        "review_filter": "find_real_recommendations 결과 기반"
+      }
+    },
+    "expected_output_essence": "광고성 신호를 제외한 실제 만족 후기 기반 후보 3개 + 신뢰 근거 요약",
+    "edge_case_notes": "출처별 반복 추천이 광고 캠페인일 수 있어 동일 문구 반복 여부를 감점"
+  },
+  {
+    "id": 21,
+    "user_utterance": "부모님 두 분 같이 드릴 추석 선물 추천해줘. 작년에 한우 했고 이번엔 좀 다르게",
+    "relevant_tools": ["curate_gifts"],
+    "tool_inputs": {
+      "curate_gifts": {
+        "relation": "부모님",
+        "occasion": "추석",
+        "budget_max": null,
+        "previous_gifts": ["한우"],
+        "parent_situation": "부모님 두 분이 함께 받을 선물",
+        "exclude_categories": ["한우"],
+        "review_filter": "명절 선물 후기 중 광고성 제외"
+      }
+    },
+    "expected_output_essence": "작년 선물과 겹치지 않는 공동 선물 후보 3개 + 명절성·실용성·부담감 기준 비교",
+    "edge_case_notes": "예산이 없으므로 가격대별 후보를 분산하고 과포장 선물은 감점"
+  },
+  {
+    "id": 22,
+    "user_utterance": "아빠 생신에 안마의자 사는 거 너무 과한가? 집이 좁고 예산은 150 정도야",
+    "relevant_tools": ["evaluate_gift_idea"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "relation": "아빠",
+        "occasion": "생신",
+        "gift_idea": "안마의자",
+        "budget": 1500000,
+        "parent_situation": "집이 좁음",
+        "evaluation_criteria": ["공간 적합성", "예산 적합성", "사용 지속 가능성", "부담감"]
+      }
+    },
+    "expected_output_essence": "선물 아이디어 적합도 평가 + 공간·관리 부담 리스크 + 대체 후보 방향",
+    "edge_case_notes": "건강 효능을 단정하지 않고 공간·생활패턴 기준으로 평가"
+  },
+  {
+    "id": 23,
+    "user_utterance": "엄마한테 현금 드리는 게 제일 낫나? 성의 없어 보일까 봐 고민돼",
+    "relevant_tools": ["evaluate_gift_idea", "compose_gift_message"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "relation": "엄마",
+        "occasion": "기념일",
+        "gift_idea": "현금",
+        "budget": null,
+        "parent_situation": "성의 없어 보일까 우려",
+        "evaluation_criteria": ["실용성", "정서적 전달력", "포장 방식", "메시지 보완 가능성"]
+      },
+      "compose_gift_message": {
+        "relation": "엄마",
+        "occasion": "기념일",
+        "gift_item": "현금",
+        "tone": "성의가 느껴지되 부담스럽지 않게"
+      }
+    },
+    "expected_output_essence": "현금 선물의 장단점 + 성의 있게 보이는 전달 방식 + 동봉 메시지 예시",
+    "edge_case_notes": "현금 자체보다 포장·메시지·사용처 제안으로 정서적 부족함 보완"
+  },
+  {
+    "id": 24,
+    "user_utterance": "장인어른께 전동면도기 괜찮을까? 이미 쓰는 게 있는지는 잘 몰라",
+    "relevant_tools": ["evaluate_gift_idea"],
+    "tool_inputs": {
+      "evaluate_gift_idea": {
+        "relation": "장인어른",
+        "occasion": "선물",
+        "gift_idea": "전동면도기",
+        "budget": null,
+        "parent_situation": "기존 사용 제품 여부 모름",
+        "evaluation_criteria": ["중복 가능성", "취향 민감도", "교환 편의성", "대안성"]
+      }
+    },
+    "expected_output_essence": "전동면도기 적합도 + 사전 확인 질문 + 중복 리스크를 줄이는 구매 조건",
+    "edge_case_notes": "기존 제품 사용 여부가 불확실하므로 교환 가능성과 소모품형 대안 제시"
+  },
+  {
+    "id": 25,
+    "user_utterance": "추천해준 거 중에 디퓨저는 엄마가 향 싫어할 수도 있어서 빼고, 실용적인 쪽으로 다시 골라줘",
+    "relevant_tools": ["refine_recommendation"],
+    "tool_inputs": {
+      "refine_recommendation": {
+        "previous_recommendations": ["디퓨저", "실내복", "프리미엄 차 세트"],
+        "user_feedback": "향 제품 제외, 실용성 우선",
+        "relation": "엄마",
+        "occasion": "선물",
+        "budget_max": null,
+        "parent_situation": "향에 민감할 수 있음"
+      }
+    },
+    "expected_output_essence": "향 제품 제외 후 실용성 중심 재추천 3개 + 변경 이유",
+    "edge_case_notes": "이전 추천 맥락이 없으면 사용자가 언급한 디퓨저만 제외 조건으로 반영"
+  },
+  {
+    "id": 26,
+    "user_utterance": "아빠 선물은 취미용보다 매일 쓰는 걸로 바꿔줘. 낚시용품은 이미 많대",
+    "relevant_tools": ["refine_recommendation"],
+    "tool_inputs": {
+      "refine_recommendation": {
+        "previous_recommendations": ["낚시용품", "취미용 장비", "아웃도어 소품"],
+        "user_feedback": "취미용 제외, 매일 쓰는 생활용품 선호",
+        "relation": "아빠",
+        "occasion": "생일",
+        "budget_max": null,
+        "parent_situation": "낚시용품은 이미 많음"
+      }
+    },
+    "expected_output_essence": "취미 중복 리스크를 줄인 생활밀착형 재추천 + 매일 사용 가능성 기준 설명",
+    "edge_case_notes": "기존 취미를 부정하지 않고 중복 회피 관점으로 재추천"
+  },
+  {
+    "id": 27,
+    "user_utterance": "부모님께 과일세트 보내면서 카드에 한 줄 적고 싶은데 너무 오글거리지 않게",
+    "relevant_tools": ["compose_gift_message"],
+    "tool_inputs": {
+      "compose_gift_message": {
+        "relation": "부모님",
+        "occasion": "선물",
+        "gift_item": "과일세트",
+        "tone": "담백하고 자연스럽게",
+        "message_length": "한 줄"
+      }
+    },
+    "expected_output_essence": "과하지 않은 한 줄 카드 메시지 3개 버전",
+    "edge_case_notes": "시혜적 표현이나 감정 과잉 표현 없이 일상적인 문장으로 작성"
+  },
+  {
+    "id": 28,
+    "user_utterance": "엄마 환갑 선물에 같이 넣을 문구 써줘. '오래오래 건강하세요' 말고 좀 덜 흔한 걸로",
+    "relevant_tools": ["compose_gift_message"],
+    "tool_inputs": {
+      "compose_gift_message": {
+        "relation": "엄마",
+        "occasion": "환갑",
+        "gift_item": "환갑 선물",
+        "tone": "진심은 있지만 흔하지 않게",
+        "message_length": "한 줄"
+      }
+    },
+    "expected_output_essence": "흔한 건강 기원 문구를 피한 환갑 카드 메시지 3~5개",
+    "edge_case_notes": "나이를 강조하거나 과도하게 감상적인 표현은 피함"
+  },
+  {
+    "id": 29,
+    "user_utterance": "60대 엄마들이 실제로 오래 쓰는 가방 후기 좀 찾아줘. 협찬 말고 찐사용 위주로",
+    "relevant_tools": ["find_real_recommendations"],
+    "tool_inputs": {
+      "find_real_recommendations": {
+        "category": "60대 여성 데일리 가방",
+        "channels": ["블로그", "맘카페", "인스타", "당근마켓 후기"],
+        "exclude_ad_signals": true,
+        "positive_signals": ["장기사용", "재구매", "수납 만족", "무게 언급", "단점 언급"],
+        "target_user": "60대 엄마"
+      }
+    },
+    "expected_output_essence": "광고 제외 기준 + 실제 만족 후기에서 반복되는 가방 조건 + 검색 키워드 후보",
+    "edge_case_notes": "브랜드 특정 추천보다 무게·수납·착용감 같은 속성 중심으로 요약"
+  },
+  {
+    "id": 30,
+    "user_utterance": "아빠 겨울 내복 사려는데 블로그 광고 너무 많아서 진짜 입어본 후기 기준으로 골라줘",
+    "relevant_tools": ["find_real_recommendations", "curate_gifts"],
+    "tool_inputs": {
+      "find_real_recommendations": {
+        "category": "남성 겨울 내복",
+        "channels": ["블로그", "맘카페", "커뮤니티", "쇼핑 후기"],
+        "exclude_ad_signals": true,
+        "positive_signals": ["세탁 후 변화", "착용감", "보온감", "재구매", "부모님 반응"],
+        "target_user": "60~70대 아빠"
+      },
+      "curate_gifts": {
+        "relation": "아빠",
+        "occasion": "겨울 선물",
+        "budget_max": null,
+        "previous_gifts": null,
+        "parent_situation": "겨울 내복 필요",
+        "review_filter": "find_real_recommendations 결과 기반"
+      }
+    },
+    "expected_output_essence": "진짜 착용 후기에서 반복되는 기준 + 내복 선물 후보 3개 + 광고성 후기 제외 근거",
+    "edge_case_notes": "체형·소재 민감도가 있으므로 사이즈 교환 가능성과 세탁 후 변형 후기를 중점 반영"
+  }
+]
