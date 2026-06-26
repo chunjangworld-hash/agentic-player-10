@@ -59,15 +59,15 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="refine_recommendation",
         description=(
-            "Gift Curator(선물고민러). Generate new gift candidates based on user "
-            "feedback on previous recommendations. Parses feedback signals (price too "
-            "high/low, wrong category, wrong style) from a structured feedback_direction "
-            "enum provided by the calling agent, then re-runs curation in that direction "
-            "while avoiding the previous_keywords. Returns 3 new candidates in the same "
-            "format as curate_gifts. Does not call LLM internally - the calling agent is "
-            "responsible for parsing the user's free-form feedback into the structured "
-            "feedback_direction input. Use this when the user reacts to a previous "
-            "curate_gifts output with negative or directional feedback."
+            "Gift Curator(선물고민러). Use this only after curate_gifts or "
+            "evaluate_gift_idea when the user gives directional feedback such as too "
+            "expensive, wrong style, already bought, avoid category, more practical, "
+            "or more premium. The calling agent should convert free-form feedback into "
+            "structured feedback_direction and previous_keywords. This tool explicitly "
+            "calls external web search again, avoids prior keywords, reapplies F1 ad "
+            "filters and F2 satisfaction scoring, and returns 3 revised candidates in "
+            "the same Gift MCP compatible format. LLM-free: rule-based re-ranking and "
+            "exclusion logic."
         ),
         annotations={
             "title": "선물 재추천 (피드백 반영)",

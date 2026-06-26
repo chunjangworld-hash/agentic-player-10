@@ -174,13 +174,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="find_upcoming_events",
         description=(
-            "Hyodo Secretary(효도비서). Find upcoming events to check on the user's "
-            "parent within a given time window. Combines seasonal events (Korean public "
-            "holidays, seasonal health risks, climate transitions) with personal events "
-            "extracted from parent_brief (birthdays, anniversaries, milestones). Returns "
-            "structured event list with recommended check-in actions. Does not call LLM "
-            "internally - uses static calendar data + simple text extraction. Use this "
-            "when the user wants to plan parent care for the upcoming weeks."
+            "Hyodo Secretary(효도비서). Use this when the user asks what parent-related "
+            "dates, seasonal issues, or upcoming check-in opportunities should be "
+            "considered before composing a message or reminder. Returns a structured "
+            "event list from static Korean calendar data plus simple extraction from "
+            "parent_brief, including date window, event type, relevance reason, and "
+            "suggested check-in action. It does not create the final greeting; call "
+            "compose_anbu next if the user wants message wording. LLM-free: "
+            "deterministic calendar lookup and pattern extraction."
         ),
         annotations={
             "title": "부모님 챙길 일 찾기",

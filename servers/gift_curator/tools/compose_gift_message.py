@@ -146,13 +146,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="compose_gift_message",
         description=(
-            "Gift Curator(선물고민러). Generate message card templates to accompany "
-            "a gift, tailored to the relationship, occasion, and chosen gift. "
-            "Returns 2-3 template variants in different tones (formal/casual/heartfelt) "
-            "along with a tone selection guide. Does not call LLM internally - uses "
-            "pre-curated Korean message templates organized by relationship type and "
-            "occasion. Use this when the user has decided on a gift and needs help "
-            "writing the accompanying message."
+            "Gift Curator(선물고민러). Use this when the user has already chosen or "
+            "nearly chosen a gift and needs a short Korean message card, enclosure "
+            "note, or chat-ready line for the recipient. Returns 2-3 template variants "
+            "by relationship, occasion, formality, and emotional intensity, plus a "
+            "tone-selection guide. It does not recommend products or search reviews; "
+            "call curate_gifts or evaluate_gift_idea first when the item is not "
+            "settled. LLM-free: curated Korean gift-message templates with rule-based "
+            "slot filling."
         ),
         annotations={
             "title": "선물 메시지 카드 초안",

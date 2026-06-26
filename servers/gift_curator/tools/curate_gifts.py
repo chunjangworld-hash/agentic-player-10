@@ -147,17 +147,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="curate_gifts",
         description=(
-            "Gift Curator(선물고민러). Generate curated gift candidates for the user's "
-            "recipient based on relationship, occasion, budget, and recipient context. "
-            "Combines Naver Blog/Cafe and Tavily web search results, filters out ads "
-            "and sponsored content using rule-based detection (F1: 협찬/체험단/공동구매 "
-            "keyword matching), scores positive signals (F2: 구매증빙/타인반응/재구매), "
-            "and returns 3 candidates in distinct tones (practical / emotional / "
-            "special). Each candidate includes SearchGift-compatible parameters (query, "
-            "minPrice, maxPrice, customTags), non-ad source attribution, reasoning, and "
-            "trend hints. Does not call LLM internally - the calling agent should pass "
-            "each candidate's SearchGift params to the Kakao Gift MCP for catalog "
-            "retrieval. Use this as the primary gift recommendation tool."
+            "Gift Curator(선물고민러). Use this as the primary tool when the user asks "
+            "what gift to buy for a recipient, occasion, budget, or parent situation. "
+            "This tool explicitly calls external web search, filters ad/sponsored "
+            "review spam with F1 rules, scores genuine-satisfaction evidence with F2 "
+            "signals, and returns 3 distinct candidates with reasons, non-ad source "
+            "attribution, risk notes, and first-party Gift MCP compatible query, "
+            "minPrice, maxPrice, and customTags parameters. LLM-free: deterministic "
+            "search-result filtering, scoring, and parameter formatting."
         ),
         annotations={
             "title": "광고 없는 선물 후보 큐레이션",

@@ -219,14 +219,15 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="check_suspicious_message",
         description=(
-            "Hyodo Secretary(효도비서). Analyze a Korean message (typed text, OCR result, "
-            "or natural-language description) to detect scam/phishing/smishing patterns. "
-            "Returns structured risk signals (suspicious URLs, suspicious keywords, "
-            "matched scam types, recommended user actions) for the calling agent to make "
-            "a final judgment and explain to the user. Does not call LLM internally - uses "
-            "rule-based pattern matching against a curated database of Korean scam "
-            "patterns. Use this when the user shares a suspicious KakaoTalk message "
-            "(usually one their parent received)."
+            "Hyodo Secretary(효도비서). Use this when the user provides a suspicious "
+            "Korean message, OCR text, sender clue, URL, or natural-language "
+            "description of something a parent received and asks whether it may be "
+            "scam, phishing, or smishing. Returns matched risk signals, scam-type "
+            "labels, URL/sender red flags, confidence band, and recommended next "
+            "actions for the calling agent to explain. It does not write a warning "
+            "to the parent; call compose_parent_warning next if forwarding guidance "
+            "is needed. LLM-free: rule-based matching against a curated Korean "
+            "scam-pattern database."
         ),
         annotations={
             "title": "의심 메시지 사기 판단",

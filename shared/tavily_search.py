@@ -17,6 +17,10 @@ class TavilySearch:
     def __init__(self, http: HttpClient) -> None:
         self._http = http
         self._settings = get_settings()
+        if not self._settings.tavily_api_key:
+            raise RuntimeError(
+                "Tavily 검색 사용 불가: TAVILY_API_KEY 환경변수 누락"
+            )
 
     async def search(
         self,
