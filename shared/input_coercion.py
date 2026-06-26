@@ -44,3 +44,33 @@ def _stringify_nested(value: Any) -> str:
             return " ".join(f"{k} {v}" for k, v in value.items())
         return " ".join(str(v) for v in value)
     return str(value)
+
+
+def gather_unknowns_into(
+    data: Any,
+    field_name: str,
+    defined_fields: set[str],
+) -> Any:
+    """LLM이 schema 무시하고 자체 키로 보낼 때 unknown keys를 brief 필드로 흡수.
+
+    실제 사건: 카카오 LLM이 ComposeAnbuInput에 `parent_brief` 대신 `parent_age`,
+    `recent_event` 같은 자체 키로 보냄 → Pydantic이 parent_brief 누락 에러.
+
+    동작:
+    - data가 dict가 아니면 그대로 통과 (Pydantic이 처리)
+    - data에 field_name 키가 이미 있고 값이 있으면 그대로 (덮어쓰지 않음)
+    - 그 외엔 정의되지 않은 키들을 모아서 field_name으로 합침
+
+    Args:
+        data: model_validator(mode="before")에 들어온 raw input
+        field_name: unknowns를 흡수할 대상 필드 (예: 'parent_brief')
+        defined_fields: 모델에 정의된 필드 이름 집합 (cls.model_fields.keys())
+    """
+    if not isinstance(data, dict):
+        return data
+    if data.get(field_name):
+        return data
+    extras = {k: v for k, v in data.items() if k not in defined_fields and v is not None}
+    if extras:
+        data[field_name] = ", ".join(f"{k}: {v}" for k, v in extras.items())
+    return data

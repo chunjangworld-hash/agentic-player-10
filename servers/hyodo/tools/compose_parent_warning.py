@@ -10,9 +10,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-from shared.input_coercion import coerce_to_string
+from shared.input_coercion import coerce_to_string, gather_unknowns_into
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -53,6 +53,11 @@ class ComposeParentWarningInput(BaseModel):
         "medium",
         description="긴급도. low는 medium 톤으로 폴백.",
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gather_unknowns(cls, data):
+        return gather_unknowns_into(data, "scam_type", set(cls.model_fields.keys()))
 
     @field_validator("scam_type", "parent_brief", mode="before")
     @classmethod

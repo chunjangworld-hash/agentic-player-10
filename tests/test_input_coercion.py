@@ -106,3 +106,62 @@ def test_compose_anbu_empty_dict_fails_min_length():
     """빈 dict → 빈 str → min_length 검증 실패. 이게 정상."""
     with pytest.raises(ValueError):
         ComposeAnbuInput(parent_brief={})
+
+
+# phase-2.5 — unknown keys 자동 흡수 (실제 마켓 AI 채팅 사건 재현)
+
+def test_compose_anbu_gathers_unknown_keys_into_brief():
+    """실제 사건: LLM이 parent_brief 대신 parent_age, recent_event로 보냄."""
+    inp = ComposeAnbuInput.model_validate(
+        {"parent_age": 65, "recent_event": "어깨 수술"}
+    )
+    assert isinstance(inp.parent_brief, str)
+    assert "parent_age: 65" in inp.parent_brief
+    assert "recent_event: 어깨 수술" in inp.parent_brief
+
+
+def test_compose_anbu_unknown_keys_with_defined_field_kept():
+    """unknown + 정의된 필드 같이 와도 정의된 건 보존."""
+    inp = ComposeAnbuInput.model_validate({
+        "parent_age": 65,
+        "occasion": "환절기",  # 정의된 필드 — 그대로
+    })
+    assert inp.occasion == "환절기"
+    assert "parent_age: 65" in inp.parent_brief
+
+
+def test_compose_anbu_existing_brief_not_overwritten():
+    """parent_brief 이미 채워져 있으면 unknowns로 덮어쓰지 않음."""
+    inp = ComposeAnbuInput.model_validate({
+        "parent_brief": "엄마 60대 등산",
+        "parent_age": 65,  # unknown — 무시
+    })
+    assert inp.parent_brief == "엄마 60대 등산"
+
+
+def test_check_suspicious_gathers_unknowns_to_message_text():
+    """check_suspicious_message도 동일한 흐름."""
+    inp = CheckSuspiciousMessageInput.model_validate(
+        {"sender": "010-1234-5678", "body": "긴급 대출 승인 클릭"}
+    )
+    assert isinstance(inp.message_text, str)
+    assert "긴급 대출 승인 클릭" in inp.message_text
+
+
+def test_curate_gifts_gathers_unknowns_to_recipient_brief():
+    """선물고민러 메인 Tool도 동일."""
+    from servers.gift_curator.tools.curate_gifts import CurateGiftsInput
+    inp = CurateGiftsInput.model_validate({
+        "recipient_age": 30,
+        "relationship": "친구",
+        "interests": "독서",
+    })
+    assert isinstance(inp.recipient_brief, str)
+    assert "친구" in inp.recipient_brief
+    assert "독서" in inp.recipient_brief
+
+
+def test_compose_anbu_no_unknown_keys_passthrough():
+    """unknown 없이 정상 입력은 그대로 통과 (regression 없음)."""
+    inp = ComposeAnbuInput.model_validate({"parent_brief": "엄마 65세"})
+    assert inp.parent_brief == "엄마 65세"

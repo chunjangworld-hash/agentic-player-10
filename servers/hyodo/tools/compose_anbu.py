@@ -11,9 +11,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-from shared.input_coercion import coerce_to_string
+from shared.input_coercion import coerce_to_string, gather_unknowns_into
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -42,6 +42,11 @@ class ComposeAnbuInput(BaseModel):
         None,
         description="Forward compat. 카카오톡 이미지 입력 지원 시 사용. 현재 미사용.",
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gather_unknowns(cls, data):
+        return gather_unknowns_into(data, "parent_brief", set(cls.model_fields.keys()))
 
     @field_validator("parent_brief", "occasion", "image_base64", mode="before")
     @classmethod

@@ -9,9 +9,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-from shared.input_coercion import coerce_to_string
+from shared.input_coercion import coerce_to_string, gather_unknowns_into
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -30,6 +30,11 @@ class ComposeGiftMessageInput(BaseModel):
     ]
     occasion: str = Field(..., min_length=1, max_length=100)
     tone_preference: Literal["formal", "casual", "heartfelt"] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gather_unknowns(cls, data):
+        return gather_unknowns_into(data, "gift_name", set(cls.model_fields.keys()))
 
     @field_validator("gift_name", "occasion", mode="before")
     @classmethod

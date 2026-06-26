@@ -12,9 +12,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-from shared.input_coercion import coerce_to_string
+from shared.input_coercion import coerce_to_string, gather_unknowns_into
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -44,6 +44,11 @@ class FindUpcomingEventsInput(BaseModel):
         le=365,
         description="앞으로 며칠 범위에서 이벤트를 검색할지. 7~365.",
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gather_unknowns(cls, data):
+        return gather_unknowns_into(data, "parent_brief", set(cls.model_fields.keys()))
 
     @field_validator("parent_brief", mode="before")
     @classmethod
