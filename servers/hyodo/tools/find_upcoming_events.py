@@ -12,8 +12,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
+from shared.input_coercion import coerce_to_string
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -43,6 +44,11 @@ class FindUpcomingEventsInput(BaseModel):
         le=365,
         description="앞으로 며칠 범위에서 이벤트를 검색할지. 7~365.",
     )
+
+    @field_validator("parent_brief", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 @lru_cache(maxsize=1)

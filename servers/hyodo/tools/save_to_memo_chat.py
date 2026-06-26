@@ -8,8 +8,9 @@ from __future__ import annotations
 from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
+from shared.input_coercion import coerce_to_string
 from shared.response_builder import ResponseBuilder
 
 
@@ -17,6 +18,11 @@ class SaveToMemoChatInput(BaseModel):
     content: str = Field(..., min_length=1, max_length=5000)
     category: Literal["anbu", "warning", "event", "general"] = "general"
     label: str | None = Field(None, max_length=100)
+
+    @field_validator("content", "label", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 _CATEGORY_KOR = {
