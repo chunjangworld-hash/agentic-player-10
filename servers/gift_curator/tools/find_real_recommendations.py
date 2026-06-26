@@ -7,9 +7,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from shared.ad_filter import AdFilter
+from shared.input_coercion import coerce_to_string
 from shared.http_client import HttpClient
 from shared.naver_search import NaverSearch
 from shared.positive_signals import PositiveSignalScorer
@@ -24,6 +25,11 @@ class FindRealRecommendationsInput(BaseModel):
     keyword: str = Field(..., min_length=1, max_length=100)
     max_results: int = Field(5, ge=1, le=10)
     source_preference: Literal["all", "blog", "cafe", "global"] = "all"
+
+    @field_validator("keyword", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 async def find_real_recommendations(inp: FindRealRecommendationsInput) -> str:

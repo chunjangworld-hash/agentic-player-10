@@ -12,8 +12,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
+from shared.input_coercion import coerce_to_string
 from shared.response_builder import ResponseBuilder
 
 if TYPE_CHECKING:
@@ -66,6 +67,11 @@ class CheckSuspiciousMessageInput(BaseModel):
         None,
         description="향후 카카오톡이 이미지 입력 지원 시 사용. 현재 사용 안 함.",
     )
+
+    @field_validator("message_text", "sender_info", "image_base64", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 @lru_cache(maxsize=1)

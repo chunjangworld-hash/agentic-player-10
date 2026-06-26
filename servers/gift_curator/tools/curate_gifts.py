@@ -9,9 +9,10 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from shared.ad_filter import AdFilter
+from shared.input_coercion import coerce_to_string
 from shared.http_client import HttpClient
 from shared.naver_search import NaverSearch
 from shared.positive_signals import PositiveSignalScorer
@@ -33,6 +34,11 @@ class CurateGiftsInput(BaseModel):
     budget_max: int | None = Field(None, ge=1000)
     avoid_categories: list[str] | None = Field(None, max_length=10)
     recent_gifts_hint: list[str] | None = Field(None, max_length=5)
+
+    @field_validator("recipient_brief", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 def _extract_budget(brief: str) -> int | None:

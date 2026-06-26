@@ -6,9 +6,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from servers.gift_curator.tools.curate_gifts import CurateGiftsInput, curate_gifts
+from shared.input_coercion import coerce_to_string
 
 if TYPE_CHECKING:
     from mcp.server.fastmcp import FastMCP
@@ -37,6 +38,11 @@ class RefineRecommendationInput(BaseModel):
     ]
     recipient_brief: str = Field(..., min_length=1, max_length=500)
     new_budget_max: int | None = Field(None, ge=1000)
+
+    @field_validator("recipient_brief", mode="before")
+    @classmethod
+    def _coerce_strings(cls, v):
+        return coerce_to_string(v)
 
 
 async def refine_recommendation(inp: RefineRecommendationInput) -> str:
