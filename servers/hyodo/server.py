@@ -28,8 +28,9 @@ mcp = FastMCP(
 )
 
 
-# Tool 등록은 Phase 2.2에서 추가됨
-# from servers.hyodo.tools import compose_anbu, check_suspicious_message, ...
+# Tool 등록 (모든 효도비서 Tool 일괄)
+from servers.hyodo.tools import register_all
+register_all(mcp)
 
 
 def main() -> None:

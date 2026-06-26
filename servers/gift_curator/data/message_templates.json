@@ -1,0 +1,303 @@
+{
+  "_meta": {
+    "purpose": "선물고민러 compose_gift_message Tool의 관계×행사×톤 별 메시지 카드 템플릿",
+    "scope": "30개 핵심 조합 (300개 가능 조합 중 빈번한 것만). 호출 에이전트가 parent_brief·선물명을 결합해 최종 다듬음",
+    "tone_definitions_ref": "relationship_tone_map.json의 tone_definitions 참조",
+    "version": "1.0",
+    "last_updated": "2026-06-22"
+  },
+  "templates": [
+    {
+      "id": "parent_60th_heartfelt",
+      "relationship": "parent",
+      "occasion": "환갑 (60세)",
+      "tone": "heartfelt",
+      "main_message": "엄마/아빠, 환갑 진심으로 축하해요. 늘 든든하게 계셔주셔서 감사합니다. 이번 한 해는 본인 위해서도 쉬어가시고, 오래오래 건강하세요.",
+      "short_variation": "엄마/아빠, 환갑 축하해요. 늘 건강하시고 사랑해요.",
+      "gift_category_hint": "건강·휴식·여행·전통 의례 선물 OK"
+    },
+    {
+      "id": "parent_70th_heartfelt",
+      "relationship": "parent",
+      "occasion": "칠순 (70세)",
+      "tone": "heartfelt",
+      "main_message": "엄마/아빠, 칠순 정말 축하드려요. 지난 세월 가족을 위해 애쓰신 거 늘 마음에 두고 있어요. 이제는 본인 행복 더 챙기시면서 평안하게 보내세요.",
+      "short_variation": "엄마/아빠, 칠순 축하해요. 건강이 최고예요!",
+      "gift_category_hint": "건강 보양품·전통 의례·여행 패키지·가족 모임 비용"
+    },
+    {
+      "id": "parent_birthday_heartfelt",
+      "relationship": "parent",
+      "occasion": "생신",
+      "tone": "heartfelt",
+      "main_message": "엄마/아빠, 생신 축하해요. 늘 건강하시고 행복하시길 바라요. 멀리 있어도 항상 마음으로 응원하고 있어요.",
+      "short_variation": "엄마/아빠, 생신 축하해요. 사랑합니다.",
+      "gift_category_hint": "취향 맞춤 선물·건강 식품·옷·소품"
+    },
+    {
+      "id": "parent_parents_day_heartfelt",
+      "relationship": "parent",
+      "occasion": "어버이날",
+      "tone": "heartfelt",
+      "main_message": "엄마/아빠, 늘 든든하게 키워주시고 사랑해 주셔서 감사해요. 어버이날, 작은 마음 전해요. 오래오래 건강하세요.",
+      "short_variation": "엄마/아빠, 항상 감사해요. 사랑합니다 ❤️",
+      "gift_category_hint": "카네이션·건강 식품·취향 선물·외식 상품권"
+    },
+    {
+      "id": "parent_holiday_formal",
+      "relationship": "parent",
+      "occasion": "추석/설 명절",
+      "tone": "formal",
+      "main_message": "엄마/아빠, [명절] 잘 보내세요. 멀리 있어도 마음은 가까이 있어요. 건강하시고, 푹 쉬세요.",
+      "short_variation": "엄마/아빠, [명절] 잘 보내세요. 사랑해요.",
+      "gift_category_hint": "정성 보양품·홍삼·과일 세트·고기 세트"
+    },
+    {
+      "id": "parent_recovery_heartfelt",
+      "relationship": "parent",
+      "occasion": "병문안·회복 기원",
+      "tone": "heartfelt",
+      "main_message": "엄마/아빠, 빨리 회복하시길 바라요. 무리하지 마시고 푹 쉬시면서, 필요한 거 있으면 언제든 말씀하세요. 항상 옆에 있어요.",
+      "short_variation": "엄마/아빠, 푹 쉬시고 빨리 회복하세요. 사랑해요.",
+      "gift_category_hint": "회복 보양품·죽 세트·과일·꽃다발 (병문안 금기 음식 확인)"
+    },
+    {
+      "id": "friend_birthday_casual",
+      "relationship": "friend",
+      "occasion": "생일",
+      "tone": "casual",
+      "main_message": "○○야 생일 축하해 🎂\n한 해 정말 멋지게 보내고, 우리 자주 보자!",
+      "short_variation": "생일 축하해 ㅎㅎ 행복하자!",
+      "gift_category_hint": "취향 맞춤·트렌드 아이템·꽃·디저트"
+    },
+    {
+      "id": "friend_wedding_casual",
+      "relationship": "friend",
+      "occasion": "결혼",
+      "tone": "casual",
+      "main_message": "○○야 결혼 진심으로 축하해 💍\n행복한 가정 꾸려서 오래오래 행복하길!",
+      "short_variation": "결혼 축하해! 행복해야 해!",
+      "gift_category_hint": "신혼 생활용품·축의금 외 작은 선물·가전 소품"
+    },
+    {
+      "id": "friend_baby_casual",
+      "relationship": "friend",
+      "occasion": "출산·돌잔치",
+      "tone": "casual",
+      "main_message": "○○야 출산 축하해 🍼\n아기 건강하게 잘 크길! 너도 푹 쉬어!",
+      "short_variation": "출산 축하해! 아기랑 너 둘 다 건강해야 해!",
+      "gift_category_hint": "아기 용품·산모 회복·기저귀 케이크"
+    },
+    {
+      "id": "friend_consolation_heartfelt",
+      "relationship": "friend",
+      "occasion": "위로",
+      "tone": "heartfelt",
+      "main_message": "○○야, 많이 힘들지. 말로 다 표현 못 하지만, 옆에 있을게. 무리하지 말고 충분히 쉬어.",
+      "short_variation": "○○야, 옆에 있을게. 힘내자 ㅠㅠ",
+      "gift_category_hint": "위로 차·죽·꽃·따뜻한 음식 (과한 축하 X)"
+    },
+    {
+      "id": "friend_thanks_casual",
+      "relationship": "friend",
+      "occasion": "감사 인사",
+      "tone": "casual",
+      "main_message": "○○야 늘 고마워! 작은 마음이야. 우리 자주 보자 💛",
+      "short_variation": "고마워! 잘 써!",
+      "gift_category_hint": "디저트·커피·핸드크림·작은 소품"
+    },
+    {
+      "id": "lover_100days_heartfelt",
+      "relationship": "lover",
+      "occasion": "100일 (또는 N일)",
+      "tone": "heartfelt",
+      "main_message": "[자기 이름]야/씨, 우리 [100]일 축하해 💕\n함께한 시간이 정말 행복했어. 앞으로도 오래오래 함께하자.",
+      "short_variation": "100일 축하해! 사랑해 💕",
+      "gift_category_hint": "기념 액세서리·향수·로맨틱 디저트·꽃다발"
+    },
+    {
+      "id": "lover_birthday_heartfelt",
+      "relationship": "lover",
+      "occasion": "생일",
+      "tone": "heartfelt",
+      "main_message": "[자기]야/씨, 생일 진심으로 축하해 🎂\n네가 있어서 나도 행복해. 이번 한 해 너의 모든 날이 빛나길!",
+      "short_variation": "생일 축하해! 사랑해 ❤️",
+      "gift_category_hint": "취향 맞춤·기념 액세서리·체험 선물"
+    },
+    {
+      "id": "lover_valentine_heartfelt",
+      "relationship": "lover",
+      "occasion": "발렌타인/화이트데이",
+      "tone": "heartfelt",
+      "main_message": "[자기]야/씨, [발렌타인/화이트데이] 함께해서 행복해 🍫\n매일이 오늘 같았으면 좋겠어. 사랑해.",
+      "short_variation": "발렌타인 ❤️ 사랑해!",
+      "gift_category_hint": "초콜릿·꽃·기념 소품·디저트"
+    },
+    {
+      "id": "lover_christmas_heartfelt",
+      "relationship": "lover",
+      "occasion": "크리스마스",
+      "tone": "heartfelt",
+      "main_message": "[자기]야/씨, 메리 크리스마스 🎄\n올해도 함께 보내는 크리스마스라 더 따뜻해. 내년에도 함께하자!",
+      "short_variation": "메리 크리스마스 ❤️",
+      "gift_category_hint": "겨울 선물·따뜻한 의류·체험 선물·로맨틱 디너"
+    },
+    {
+      "id": "colleague_wedding_formal",
+      "relationship": "colleague",
+      "occasion": "결혼",
+      "tone": "formal",
+      "main_message": "○○님, 결혼 진심으로 축하드립니다. 행복한 가정 꾸리시길 응원할게요.",
+      "short_variation": "결혼 축하드려요!",
+      "gift_category_hint": "신혼 생활 실용품·축의금 외 작은 선물"
+    },
+    {
+      "id": "colleague_baby_formal",
+      "relationship": "colleague",
+      "occasion": "출산",
+      "tone": "formal",
+      "main_message": "○○님, 출산 진심으로 축하드립니다. 아기 건강하게 잘 크고, ○○님도 잘 회복하시길 바랄게요.",
+      "short_variation": "출산 축하드려요! 건강하세요!",
+      "gift_category_hint": "아기 용품·산모 회복·기저귀 케이크"
+    },
+    {
+      "id": "colleague_promotion_formal",
+      "relationship": "colleague",
+      "occasion": "승진",
+      "tone": "formal",
+      "main_message": "○○님, 승진 축하드립니다! 그동안 정말 수고 많으셨어요. 앞으로도 좋은 일 많으시길 응원합니다.",
+      "short_variation": "승진 축하드려요!",
+      "gift_category_hint": "꽃·축하 와인·고급 디저트·실용 선물"
+    },
+    {
+      "id": "colleague_farewell_formal",
+      "relationship": "colleague",
+      "occasion": "이직·송별",
+      "tone": "formal",
+      "main_message": "○○님, 함께 일할 수 있어서 정말 좋았어요. 새로운 곳에서도 잘 되시길 응원할게요. 연락 자주 해요!",
+      "short_variation": "수고하셨어요. 새 출발 응원해요!",
+      "gift_category_hint": "감사 카드·작은 기념품·꽃다발"
+    },
+    {
+      "id": "boss_promotion_formal",
+      "relationship": "boss",
+      "occasion": "승진",
+      "tone": "formal",
+      "main_message": "○○님, 승진 진심으로 축하드립니다. 늘 가르침 주셔서 감사합니다. 앞으로도 많은 가르침 부탁드립니다.",
+      "short_variation": "승진 축하드립니다.",
+      "gift_category_hint": "꽃·고급 만년필·전통 차·고급 다과 (청탁금지법 확인)"
+    },
+    {
+      "id": "boss_holiday_formal",
+      "relationship": "boss",
+      "occasion": "명절 인사",
+      "tone": "formal",
+      "main_message": "○○님, 즐거운 [명절] 보내세요. 늘 가르침에 감사드립니다. 새해(또는 한가위)도 건강하시고 행복하세요.",
+      "short_variation": "[명절] 잘 보내세요. 감사드립니다.",
+      "gift_category_hint": "전통 명절 세트·홍삼·과일 (청탁금지법 5만원 한도 확인)"
+    },
+    {
+      "id": "client_holiday_formal",
+      "relationship": "client",
+      "occasion": "명절 인사",
+      "tone": "formal",
+      "main_message": "○○님, 풍요로운 [명절] 보내시길 바랍니다. 한 해 동안 늘 도움 주셔서 감사드립니다. 변함없는 신뢰에 감사드립니다.",
+      "short_variation": "[명절] 잘 보내세요. 감사드립니다.",
+      "gift_category_hint": "전통 명절 세트·고급 다과 (청탁금지법 5만원 한도)"
+    },
+    {
+      "id": "client_year_end_formal",
+      "relationship": "client",
+      "occasion": "연말 인사",
+      "tone": "formal",
+      "main_message": "○○님, 한 해 동안 함께해 주셔서 감사합니다. 마무리 잘 하시고, 새해에도 변함없는 인연 부탁드립니다.",
+      "short_variation": "한 해 감사드립니다. 새해 복 많이 받으세요.",
+      "gift_category_hint": "전통 다과·연말 카드·고급 와인 (한도 확인)"
+    },
+    {
+      "id": "inlaw_60th_formal",
+      "relationship": "in_law",
+      "occasion": "환갑",
+      "tone": "formal",
+      "main_message": "[어머님/아버님], 환갑 진심으로 축하드립니다. 늘 건강하시고, 가족 위해 애쓰신 만큼 이제는 본인 위해 행복하시길 바랍니다.",
+      "short_variation": "[어머님/아버님], 환갑 축하드립니다. 건강하세요.",
+      "gift_category_hint": "정성·격식 선물 (홍삼·전통 다구·고급 의류·여행 패키지)"
+    },
+    {
+      "id": "inlaw_parents_day_formal",
+      "relationship": "in_law",
+      "occasion": "어버이날",
+      "tone": "formal",
+      "main_message": "[어머님/아버님], 어버이날입니다. 늘 살펴주시고 사랑해 주셔서 진심으로 감사드립니다. 건강하시고 행복하세요.",
+      "short_variation": "[어머님/아버님], 어버이날 감사드립니다.",
+      "gift_category_hint": "카네이션·정성 보양품·취향 맞춤 선물"
+    },
+    {
+      "id": "inlaw_holiday_formal",
+      "relationship": "in_law",
+      "occasion": "명절 인사",
+      "tone": "formal",
+      "main_message": "[어머님/아버님], [명절] 잘 보내세요. 항상 감사드리고, 멀리 있어도 마음으로 늘 함께하고 있습니다. 건강하세요.",
+      "short_variation": "[어머님/아버님], [명절] 잘 보내세요. 감사드립니다.",
+      "gift_category_hint": "전통 명절 세트·홍삼·고급 과일·고기 세트"
+    },
+    {
+      "id": "child_birthday_heartfelt",
+      "relationship": "child",
+      "occasion": "생일",
+      "tone": "heartfelt",
+      "main_message": "우리 ○○, 생일 정말 축하해! 너가 우리 가족에 있어서 매일이 행복해. 사랑해 💛",
+      "short_variation": "○○ 생일 축하해! 사랑해!",
+      "gift_category_hint": "연령 맞춤 선물 (장난감/책/취향)"
+    },
+    {
+      "id": "child_school_heartfelt",
+      "relationship": "child",
+      "occasion": "입학·졸업",
+      "tone": "heartfelt",
+      "main_message": "○○ [입학/졸업] 정말 축하해! 그동안 정말 잘 컸어. 새로운 곳에서도 너답게 빛나길 응원해.",
+      "short_variation": "○○ 축하해! 너 자랑스러워!",
+      "gift_category_hint": "가방·문구·도서·취향 맞춤 (연령별)"
+    },
+    {
+      "id": "child_achievement_heartfelt",
+      "relationship": "child",
+      "occasion": "취업·성취",
+      "tone": "heartfelt",
+      "main_message": "우리 ○○, [취업/성취] 진심으로 축하해. 너의 노력이 빛난 결과야. 정말 자랑스럽고, 앞으로의 길도 응원할게.",
+      "short_variation": "○○ 자랑스러워. 축하해!",
+      "gift_category_hint": "정장·시계·만년필·실용 가전·여행 상품권"
+    },
+    {
+      "id": "sibling_wedding_casual",
+      "relationship": "sibling",
+      "occasion": "결혼·출산·승진",
+      "tone": "casual",
+      "main_message": "○○야 [축하 이벤트] 진심으로 축하해. 우리 가족이 한 명 더(또는 새 챕터) 시작이네! 행복해야 해.",
+      "short_variation": "축하해! 행복하자!",
+      "gift_category_hint": "관계 친밀도에 따라 실용 vs 감성"
+    }
+  ],
+  "fallback_strategy": {
+    "purpose": "30개 템플릿에 없는 조합 처리 방법",
+    "rules": [
+      "1. 같은 relationship + 유사 occasion 찾기 (예: '결혼' → 'sibling_wedding_casual' 적용)",
+      "2. 없으면 같은 relationship의 default_tone으로 일반 축하 메시지 생성",
+      "3. relationship 자체가 모호하면 'other' 카테고리로 fallback",
+      "4. 호출 에이전트가 부족한 부분 보강 (LLM의 자연어 능력 활용)"
+    ]
+  },
+  "usage_in_compose_gift_message": [
+    "1. relationship + occasion 정확 매칭으로 템플릿 찾기",
+    "2. 없으면 fallback_strategy 적용",
+    "3. tone_preference 명시 시 해당 톤만 선택, 없으면 default tone 사용",
+    "4. main_message + short_variation 모두 출력에 포함 (사용자에게 선택권)",
+    "5. gift_category_hint는 별도 표시 (메시지와 분리, 호출 에이전트에게만)",
+    "6. 청탁금지법 관련 (boss/client) 경고는 [[relationship_tone_map]]에서 가져와 추가"
+  ],
+  "tone_principles_recap": [
+    "formal: ~드립니다, ~드려요. 격식·이모지 X",
+    "casual: ~해, ~해요. 이모지·이모티콘 OK. 자유로움",
+    "heartfelt: 진심·정성 강조. 존댓말/반말 둘 다 가능. ❤️ 💕 등 감성 이모지 OK (관계에 따라)"
+  ]
+}
