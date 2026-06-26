@@ -7,10 +7,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from shared.ad_filter import AdFilter
-from shared.input_coercion import coerce_to_string
+from shared.input_coercion import coerce_to_string, gather_unknowns_into
 from shared.http_client import HttpClient
 from shared.naver_search import NaverSearch
 from shared.positive_signals import PositiveSignalScorer
@@ -25,6 +25,11 @@ class EvaluateGiftIdeaInput(BaseModel):
     gift_idea: str = Field(..., min_length=1, max_length=200)
     recipient_brief: str = Field(..., min_length=1, max_length=500)
     user_budget: int | None = Field(None, ge=1000)
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gather_unknowns(cls, data):
+        return gather_unknowns_into(data, "gift_idea", set(cls.model_fields.keys()))
 
     @field_validator("gift_idea", "recipient_brief", mode="before")
     @classmethod
