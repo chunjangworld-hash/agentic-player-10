@@ -60,12 +60,14 @@ def register(mcp) -> None:
     @mcp.tool(
         name="save_to_memo_chat",
         description=(
-            "Hyodo Secretary(효도비서). Format a Hyodo Secretary result "
-            "(greeting message, scam warning, event reminder) into a clean text "
-            "block ready for saving to the user's KakaoTalk MemoChat (나와의 채팅방). "
-            "Returns the formatted text only. Does not call MemoChat MCP directly - "
-            "the calling agent should pass this output to MemoChat MCP's MemoChat tool. "
-            "Use this when the user explicitly wants to save a Hyodo Secretary result for later reference."
+            "Hyodo Secretary(효도비서). Use this when the user explicitly asks to save "
+            "a Hyodo Secretary result for later reference in a personal memo chat or "
+            "to hand it off to MemoChat. Formats an existing greeting, warning, event "
+            "reminder, or parent-note output into a concise Korean text block with "
+            "title, date cue, source context, and action tags. This tool does not "
+            "store data or call MemoChat directly; it is LLM-free and only applies "
+            "deterministic formatting rules so the calling agent can pass the returned "
+            "text to a memo-saving tool."
         ),
         annotations={
             "title": "결과를 나챗방에 저장",

@@ -29,6 +29,10 @@ class NaverSearch:
     def __init__(self, http: HttpClient) -> None:
         self._http = http
         self._settings = get_settings()
+        if not self._settings.naver_client_id or not self._settings.naver_client_secret:
+            raise RuntimeError(
+                "Naver 검색 사용 불가: NAVER_CLIENT_ID/NAVER_CLIENT_SECRET 환경변수 누락"
+            )
 
     async def search(
         self,

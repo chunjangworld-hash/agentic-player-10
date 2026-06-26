@@ -1,0 +1,50 @@
+# syntax=docker/dockerfile:1.7
+
+FROM --platform=linux/amd64 python:3.11-slim-bookworm AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /build
+
+COPY pyproject.toml ./
+COPY shared ./shared
+COPY servers/__init__.py ./servers/__init__.py
+COPY servers/hyodo ./servers/hyodo
+
+RUN python -m pip install --upgrade pip wheel setuptools \
+    && python -m pip wheel --wheel-dir /wheels .
+
+
+FROM --platform=linux/amd64 python:3.11-slim-bookworm AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    FASTMCP_HOST=0.0.0.0 \
+    FASTMCP_PORT=8000 \
+    LOG_LEVEL=INFO
+
+WORKDIR /app
+
+RUN groupadd --system --gid 10001 app \
+    && useradd --system --uid 10001 --gid app --home-dir /nonexistent --shell /usr/sbin/nologin app
+
+COPY --from=builder /wheels /wheels
+
+RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels agentic-player-10 \
+    && rm -rf /wheels /root/.cache
+
+COPY --chown=app:app shared ./shared
+COPY --chown=app:app servers/__init__.py ./servers/__init__.py
+COPY --chown=app:app servers/hyodo ./servers/hyodo
+
+USER app
+
+EXPOSE 8000
+
+CMD ["python", "-m", "servers.hyodo.server"]

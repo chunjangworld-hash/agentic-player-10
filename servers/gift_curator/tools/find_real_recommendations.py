@@ -99,14 +99,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="find_real_recommendations",
         description=(
-            "Gift Curator(선물고민러). Search external reviews for a specific keyword "
-            "and return only non-ad sources. Applies F1 (explicit ad keyword matching: "
-            "협찬/체험단/공동구매/리뷰단/원고료/제공받은) and F2 (positive-signal "
-            "scoring: 구매증빙·재구매·장기사용·단점언급 등 키워드 매칭) to surface "
-            "trustworthy review excerpts. Returns up to N filtered sources with URL, "
-            "excerpt, and ad-filter verification. Does not call LLM internally. Use this "
-            "when the user explicitly wants to see 'real reviews' (광고 없는 진짜 후기) "
-            "for a specific keyword without full curation."
+            "Gift Curator(선물고민러). Use this when the user asks for ad-filtered real "
+            "reviews for a specific item or category, without asking for a full gift "
+            "shortlist. This tool explicitly calls external web search, then applies "
+            "F1 ad/sponsorship filters and F2 positive-signal scoring for purchase "
+            "proof, repurchase, long-term use, third-party reaction, and balanced "
+            "criticism. Returns filtered sources with URL, excerpt, matched ad "
+            "filters, positive signals, and confidence notes. LLM-free: deterministic "
+            "keyword scoring over retrieved review text."
         ),
         annotations={
             "title": "광고 없는 진짜 후기 찾기",

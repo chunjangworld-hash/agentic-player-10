@@ -26,11 +26,18 @@ def test_settings_from_env(monkeypatch):
     assert settings.response_max_chars == 22000
 
 
-def test_settings_missing_required_raises(monkeypatch):
+def test_settings_missing_keys_defaults_to_empty(monkeypatch):
+    """외부 API 키는 옵셔널 — 누락 시 부팅은 통과, 사용 시점에서 검증."""
     monkeypatch.delenv("NAVER_CLIENT_ID", raising=False)
+    monkeypatch.delenv("NAVER_CLIENT_SECRET", raising=False)
+    monkeypatch.delenv("TAVILY_API_KEY", raising=False)
 
-    with pytest.raises(ValueError, match="NAVER_CLIENT_ID"):
-        Settings.from_env()
+    settings = Settings.from_env()
+
+    assert settings.naver_client_id == ""
+    assert settings.naver_client_secret == ""
+    assert settings.tavily_api_key == ""
+    assert settings.log_level == "INFO"
 
 
 def test_get_settings_caches(monkeypatch):

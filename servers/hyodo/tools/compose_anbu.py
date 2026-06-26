@@ -237,14 +237,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="compose_anbu",
         description=(
-            "Hyodo Secretary(효도비서). Compose context data for a short greeting message "
-            "to the user's parent based on parent profile, current season, weather, and "
-            "recent news context. Returns structured data (parent profile breakdown, "
-            "seasonal keywords, recommended tone, message templates) for the calling "
-            "agent to synthesize the final greeting message in Korean. Does not call LLM "
-            "internally - the calling agent (Kakao Tools GPT/Claude) handles the final "
-            "message generation. Use this when the user wants to send a daily/weekly "
-            "check-in message to their parent."
+            "Hyodo Secretary(효도비서). Use this when the user wants help preparing a "
+            "daily, weekly, seasonal, or event-linked greeting message for an elderly "
+            "parent. Returns structured greeting context: relationship cues, "
+            "recent-event framing, seasonal keywords, respect level, tone guidance, "
+            "and 2-3 Korean template fragments for the calling agent to assemble. It "
+            "is not a generic chat writer or web-search wrapper. LLM-free: uses "
+            "curated Korean parent-message templates, calendar cues, and simple "
+            "profile fields."
         ),
         annotations={
             "title": "안부 한 줄 만들기",

@@ -1,0 +1,151 @@
+{
+  "review_summary": {
+    "overall_assessment": "The current set is generally strong, but several descriptions blur routing boundaries and a few still sound like generic writing/search wrappers rather than deterministic MCP tools. The rewrite should emphasize LLM-free rule/template/data behavior, external-search disclosure only where true, and explicit tool order for multi-step flows.",
+    "highest_risk_tool": "curate_gifts — it risks rejection as a native web-search duplicate unless the description foregrounds ad-filter scoring, curated review signals, and first-party Gift MCP parameter output.",
+    "kakao_word_violations_in_original": [
+      "save_to_memo_chat",
+      "compose_anbu",
+      "check_suspicious_message",
+      "curate_gifts"
+    ]
+  },
+  "tools": {
+    "save_to_memo_chat": {
+      "current_char_count": 380,
+      "suggested_description": "Hyodo Secretary(효도비서). Use this when the user explicitly asks to save a Hyodo Secretary result for later reference in a personal memo chat or to hand it off to MemoChat. Formats an existing greeting, warning, event reminder, or parent-note output into a concise Korean text block with title, date cue, source context, and action tags. This tool does not store data or call MemoChat directly; it is LLM-free and only applies deterministic formatting rules so the calling agent can pass the returned text to a memo-saving tool.",
+      "suggested_char_count": 525,
+      "changes_summary": [
+        "Moved the invocation trigger to the first sentence for routing clarity.",
+        "Removed platform-specific banned wording while keeping MemoChat handoff intent.",
+        "Clarified that the tool formats existing results only and does not perform storage or reasoning."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "compose_parent_warning": {
+      "current_char_count": 580,
+      "suggested_description": "Hyodo Secretary(효도비서). Use this after check_suspicious_message has already produced risk signals, or when the user asks for a parent-friendly warning about a known scam, health, or seasonal safety topic. Returns elderly-friendly Korean templates, short action steps, and follow-up channel wording tuned by parent age, relationship, and tone. It does not judge whether a message is a scam; that routing belongs to check_suspicious_message first. LLM-free: uses curated Korean warning templates and rule-based slot filling.",
+      "suggested_char_count": 521,
+      "changes_summary": [
+        "Made the sequential order with check_suspicious_message explicit.",
+        "Separated warning-message generation from scam judgment to reduce routing ambiguity.",
+        "Positioned the tool as a curated template system rather than a general writing assistant."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "compose_anbu": {
+      "current_char_count": 600,
+      "suggested_description": "Hyodo Secretary(효도비서). Use this when the user wants help preparing a daily, weekly, seasonal, or event-linked greeting message for an elderly parent. Returns structured greeting context: relationship cues, recent-event framing, seasonal keywords, respect level, tone guidance, and 2-3 Korean template fragments for the calling agent to assemble. It is not a generic chat writer or web-search wrapper. LLM-free: uses curated Korean parent-message templates, calendar cues, and simple profile fields.",
+      "suggested_char_count": 498,
+      "changes_summary": [
+        "Removed web/news/weather dependency wording that could imply a native-search wrapper.",
+        "Clarified that the output is structured context and template fragments, not final free-form reasoning.",
+        "Broadened trigger examples while keeping the parent greeting use case precise."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "find_upcoming_events": {
+      "current_char_count": 530,
+      "suggested_description": "Hyodo Secretary(효도비서). Use this when the user asks what parent-related dates, seasonal issues, or upcoming check-in opportunities should be considered before composing a message or reminder. Returns a structured event list from static Korean calendar data plus simple extraction from parent_brief, including date window, event type, relevance reason, and suggested check-in action. It does not create the final greeting; call compose_anbu next if the user wants message wording. LLM-free: deterministic calendar lookup and pattern extraction.",
+      "suggested_char_count": 542,
+      "changes_summary": [
+        "Added clear pre-composition routing: find events first, then compose_anbu for wording.",
+        "Emphasized static calendar data and pattern extraction to avoid web-search duplication risk.",
+        "Specified structured fields returned by the tool for orchestrator-friendly downstream use."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "check_suspicious_message": {
+      "current_char_count": 680,
+      "suggested_description": "Hyodo Secretary(효도비서). Use this when the user provides a suspicious Korean message, OCR text, sender clue, URL, or natural-language description of something a parent received and asks whether it may be scam, phishing, or smishing. Returns matched risk signals, scam-type labels, URL/sender red flags, confidence band, and recommended next actions for the calling agent to explain. It does not write a warning to the parent; call compose_parent_warning next if forwarding guidance is needed. LLM-free: rule-based matching against a curated Korean scam-pattern database.",
+      "suggested_char_count": 568,
+      "changes_summary": [
+        "Removed platform-specific banned wording and generalized the message source.",
+        "Made the division of labor with compose_parent_warning explicit.",
+        "Preserved the rule-based scam-pattern database differentiation from native reasoning."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "compose_gift_message": {
+      "current_char_count": 500,
+      "suggested_description": "Gift Curator(선물고민러). Use this when the user has already chosen or nearly chosen a gift and needs a short Korean message card, enclosure note, or chat-ready line for the recipient. Returns 2-3 template variants by relationship, occasion, formality, and emotional intensity, plus a tone-selection guide. It does not recommend products or search reviews; call curate_gifts or evaluate_gift_idea first when the item is not settled. LLM-free: curated Korean gift-message templates with rule-based slot filling.",
+      "suggested_char_count": 505,
+      "changes_summary": [
+        "Clarified that this is post-selection copy support, not gift recommendation.",
+        "Added routing hints to curate_gifts and evaluate_gift_idea for unsettled gift choices.",
+        "Framed output as curated templates and slot filling rather than free-form generation."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "find_real_recommendations": {
+      "current_char_count": 620,
+      "suggested_description": "Gift Curator(선물고민러). Use this when the user asks for ad-filtered real reviews for a specific item or category, without asking for a full gift shortlist. This tool explicitly calls external web search, then applies F1 ad/sponsorship filters and F2 positive-signal scoring for purchase proof, repurchase, long-term use, third-party reaction, and balanced criticism. Returns filtered sources with URL, excerpt, matched ad filters, positive signals, and confidence notes. LLM-free: deterministic keyword scoring over retrieved review text.",
+      "suggested_char_count": 535,
+      "changes_summary": [
+        "Made the trigger distinct from curate_gifts by limiting it to review evidence retrieval.",
+        "Explicitly disclosed external web search to match open-world behavior.",
+        "Strengthened differentiation with F1/F2 rule-based filtering and evidence fields."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "evaluate_gift_idea": {
+      "current_char_count": 570,
+      "suggested_description": "Gift Curator(선물고민러). Use this when the user already has one gift idea and wants a structured second opinion on fit, risks, and review quality. This tool explicitly calls external web search for the proposed item, filters sponsored/ad-heavy reviews with F1 rules, scores F2 genuine-satisfaction signals, and returns recipient-fit factors, price context when budget is provided, review evidence, and cautions. It does not generate a new shortlist unless the calling agent asks follow-up. LLM-free: rule-based review filtering and scoring.",
+      "suggested_char_count": 536,
+      "changes_summary": [
+        "Narrowed trigger to a single user-provided candidate to avoid overlap with curate_gifts.",
+        "Explicitly stated external web search and deterministic review scoring.",
+        "Added output boundaries: fit, risks, evidence, and cautions rather than new recommendations by default."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "curate_gifts": {
+      "current_char_count": 730,
+      "suggested_description": "Gift Curator(선물고민러). Use this as the primary tool when the user asks what gift to buy for a recipient, occasion, budget, or parent situation. This tool explicitly calls external web search, filters ad/sponsored review spam with F1 rules, scores genuine-satisfaction evidence with F2 signals, and returns 3 distinct candidates with reasons, non-ad source attribution, risk notes, and first-party Gift MCP compatible query, minPrice, maxPrice, and customTags parameters. LLM-free: deterministic search-result filtering, scoring, and parameter formatting.",
+      "suggested_char_count": 552,
+      "changes_summary": [
+        "Removed banned platform wording while preserving first-party Gift MCP handoff.",
+        "Made the tool's unique output explicit: filtered evidence plus compatible product-search parameters.",
+        "Reduced native-search duplication risk by foregrounding ad filtering, scoring, and deterministic formatting."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    },
+    "refine_recommendation": {
+      "current_char_count": 660,
+      "suggested_description": "Gift Curator(선물고민러). Use this only after curate_gifts or evaluate_gift_idea when the user gives directional feedback such as too expensive, wrong style, already bought, avoid category, more practical, or more premium. The calling agent should convert free-form feedback into structured feedback_direction and previous_keywords. This tool explicitly calls external web search again, avoids prior keywords, reapplies F1 ad filters and F2 satisfaction scoring, and returns 3 revised candidates in the same Gift MCP compatible format. LLM-free: rule-based re-ranking and exclusion logic.",
+      "suggested_char_count": 583,
+      "changes_summary": [
+        "Made this a strictly follow-up tool to prevent first-turn routing mistakes.",
+        "Clarified that the calling agent must parse free-form feedback before invocation.",
+        "Explicitly disclosed repeated external search plus prior-keyword exclusion and re-ranking."
+      ],
+      "differentiation_score_1_to_5": 5,
+      "trigger_clarity_score_1_to_5": 5,
+      "risk_flags": []
+    }
+  },
+  "global_recommendations": [
+    "Use consistent ordering hints: check_suspicious_message → compose_parent_warning → save_to_memo_chat; find_upcoming_events → compose_anbu → save_to_memo_chat; curate_gifts/evaluate_gift_idea → compose_gift_message; curate_gifts/evaluate_gift_idea → refine_recommendation.",
+    "Keep all descriptions explicit about whether the tool calls external web search. Hyodo tools should read as static-data, template, or rule-matching tools; Gift review tools should disclose external search and F1/F2 filtering.",
+    "Avoid platform-brand terms inside tool descriptions unless the review policy explicitly allows them. Use neutral phrases such as calling agent, messaging app, personal memo chat, and first-party Gift MCP.",
+    "Do not describe outputs as final judgments where the tool only returns signals. Use confidence band, risk signals, evidence, templates, or parameters so the calling agent remains responsible for synthesis.",
+    "Make input expectations mirror routing: suspicious text/OCR/sender/URL for scam checking, parent profile/recent event for anbu, specific item for evaluation, recipient/occasion/budget for primary curation, and structured feedback_direction for refinement."
+  ]
+}

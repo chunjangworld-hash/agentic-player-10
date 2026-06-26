@@ -205,13 +205,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="compose_parent_warning",
         description=(
-            "Hyodo Secretary(효도비서). Generate a parent-friendly warning message "
-            "template about a detected scam, suitable for the user to forward to their "
-            "parent. Returns structured templates (warning in elderly-friendly Korean, "
-            "step-by-step action guide, suggested follow-up channels) tailored to the "
-            "parent's age/profile. Does not call LLM internally - uses pre-curated "
-            "elderly-friendly templates. Use this after check_suspicious_message returns "
-            "a high-risk verdict and the user wants help warning their parent."
+            "Hyodo Secretary(효도비서). Use this after check_suspicious_message has "
+            "already produced risk signals, or when the user asks for a parent-friendly "
+            "warning about a known scam, health, or seasonal safety topic. Returns "
+            "elderly-friendly Korean templates, short action steps, and follow-up "
+            "channel wording tuned by parent age, relationship, and tone. It does not "
+            "judge whether a message is a scam; that routing belongs to "
+            "check_suspicious_message first. LLM-free: uses curated Korean warning "
+            "templates and rule-based slot filling."
         ),
         annotations={
             "title": "부모님께 보낼 경고 메시지",

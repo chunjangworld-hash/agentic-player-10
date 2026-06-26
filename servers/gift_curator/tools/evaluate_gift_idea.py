@@ -109,14 +109,14 @@ def register(mcp: "FastMCP") -> None:
     @mcp.tool(
         name="evaluate_gift_idea",
         description=(
-            "Gift Curator(선물고민러). Evaluate a user-provided gift idea against the "
-            "recipient context. Searches external reviews of the proposed item, filters "
-            "out ads (F1 keyword filter), scores positive-signal categories (F2: "
-            "purchase proof, third-party reaction, repurchase, etc.), and provides "
-            "structured signals (review summary, category distribution, price context "
-            "when budget given) for the calling agent to synthesize a final judgment. "
-            "Does not call LLM internally. Use this when the user already has a gift "
-            "candidate in mind and wants a second opinion."
+            "Gift Curator(선물고민러). Use this when the user already has one gift idea "
+            "and wants a structured second opinion on fit, risks, and review quality. "
+            "This tool explicitly calls external web search for the proposed item, "
+            "filters sponsored/ad-heavy reviews with F1 rules, scores F2 "
+            "genuine-satisfaction signals, and returns recipient-fit factors, price "
+            "context when budget is provided, review evidence, and cautions. It does "
+            "not generate a new shortlist unless the calling agent asks follow-up. "
+            "LLM-free: rule-based review filtering and scoring."
         ),
         annotations={
             "title": "선물 아이디어 평가 (자문)",
